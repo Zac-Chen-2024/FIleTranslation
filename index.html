@@ -2122,35 +2122,108 @@
             return await response.json();
         }
 
+        // function displayResult(result) {
+        //     hideLoading();
+
+        //     // 生成预览内容
+        //     const previewContent = generatePreviewContent(result);
+            
+        //     // 生成详情内容
+        //     const detailsContent = generateDetailsContent(result);
+            
+        //     // 更新预览区域
+        //     const resultPreview = document.getElementById('result-preview');
+        //     resultPreview.innerHTML = previewContent;
+            
+        //     // 更新详情区域
+        //     const resultDetails = document.getElementById('result-details');
+        //     resultDetails.innerHTML = detailsContent;
+
+        //     // 保存结果数据
+        //     translationResult = result;
+
+        //     // 显示相应的下载按钮
+        //     showDownloadButtons(result);
+            
+        //     // 如果有PDF预览，测试URL可访问性
+        //     if ((currentTranslationType === 'poster' && result.pdf_generated) ||
+        //         (currentTranslationType.startsWith('webpage') && result.download_url)) {
+        //         setTimeout(() => testPdfUrls(result), 1000);
+        //     }
+        // }
+
         function displayResult(result) {
-            hideLoading();
+        hideLoading();
+        translationResult = result; // 保存结果以供下载
 
-            // 生成预览内容
-            const previewContent = generatePreviewContent(result);
-            
-            // 生成详情内容
-            const detailsContent = generateDetailsContent(result);
-            
-            // 更新预览区域
-            const resultPreview = document.getElementById('result-preview');
-            resultPreview.innerHTML = previewContent;
-            
-            // 更新详情区域
-            const resultDetails = document.getElementById('result-details');
-            resultDetails.innerHTML = detailsContent;
+        const resultPreview = document.getElementById('result-preview');
+        const resultDetails = document.getElementById('result-details');
+        
+        let previewContent = '';
+        let detailsContent = '';
 
-            // 保存结果数据
-            translationResult = result;
+        try {
+            // --- 根据不同的翻译类型生成预览和详情 ---
 
-            // 显示相应的下载按钮
-            showDownloadButtons(result);
-            
-            // 如果有PDF预览，测试URL可访问性
-            if ((currentTranslationType === 'poster' && result.pdf_generated) ||
-                (currentTranslationType.startsWith('webpage') && result.download_url)) {
-                setTimeout(() => testPdfUrls(result), 1000);
+            if (currentTranslationType === 'poster' && result.pdf_data) {
+                // 海报翻译 (PDF) - 使用Base64
+                const pdfSrc = `data:application/pdf;base64,${result.pdf_data}`;
+                previewContent = `<iframe src="${pdfSrc}" class="preview-iframe" title="海报翻译PDF预览"></iframe>`;
+                detailsContent = generateDetailsContent(result); // 详情部分逻辑不变
+                showDownloadButtons(result);
+
+            } else if (currentTranslationType.startsWith('webpage') && result.pdf_data) {
+                // 网页翻译 (PDF) - 使用Base64
+                const pdfSrc = `data:application/pdf;base64,${result.pdf_data}`;
+                previewContent = `<iframe src="${pdfSrc}" class="preview-iframe" title="网页翻译PDF预览"></iframe>`;
+                detailsContent = generateDetailsContent(result);
+                showDownloadButtons(result);
+
+            } else if (currentTranslationType === 'baidu-image' && result.has_translated_image) {
+                // 图片翻译 - 使用Base64
+                const originalImageSrc = `data:image/jpeg;base64,${result.original_image_data}`;
+                const translatedImageSrc = `data:image/jpeg;base64,${result.translated_image_data}`;
+                const containerId = `image-container-${Date.now()}`;
+                
+                previewContent = `
+                    <div id="${containerId}" class="preview-image-container horizontal">
+                        <div class="preview-image-item">
+                            <h4>原始图片</h4>
+                            <img src="${originalImageSrc}" alt="原始图片" class="preview-image" onload="optimizeImageLayout('${containerId}')">
+                        </div>
+                        <div class="preview-image-item">
+                            <h4>翻译后图片</h4>
+                            <img src="${translatedImageSrc}" alt="翻译后图片" class="preview-image" onload="optimizeImageLayout('${containerId}')">
+                        </div>
+                    </div>`;
+                detailsContent = generateDetailsContent(result);
+                showDownloadButtons(result);
+
+            } else {
+                // 处理所有失败或无预览的情况
+                throw new Error(result.error || '未知错误，无法生成预览。');
             }
+            
+            // 更新UI
+            resultPreview.innerHTML = previewContent;
+            resultDetails.innerHTML = detailsContent;
+            showStatusMessage('翻译完成！', 'success');
+
+        } catch (error) {
+            // 统一的错误处理
+            resultPreview.innerHTML = `
+                <div class="preview-placeholder">
+                    <div class="placeholder-icon" style="color: #ef4444;">❌</div>
+                    <div class="placeholder-text">
+                        <h3>处理失败</h3>
+                        <p>${error.message}</p>
+                    </div>
+                </div>`;
+            resultDetails.innerHTML = `<div class="details-placeholder"><p>详细信息不可用</p></div>`;
+            showStatusMessage(`处理失败: ${error.message}`, 'error');
+            console.error("Display result error:", error);
         }
+    }
 
         // 测试PDF URL的可访问性
         async function testPdfUrls(result) {

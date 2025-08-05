@@ -1575,9 +1575,7 @@
     <script>
         let currentTranslationType = 'webpage-google';
         let translationResult = null;
-        // let backendUrl = 'https://file-translation.zacchen.win';
-        //测试
-        let backendUrl = 'https://filetrans2.0.drziangchen.uk';
+        let backendUrl = 'http://localhost:5000';
         let logUpdateInterval = null;
 
         // 初始化
@@ -2095,6 +2093,32 @@
                     addLogEntry('翻译流程完成', 'success');
                 } else {
                     addLogEntry(`后端返回错误: ${response.error}`, 'error');
+                    
+                    // 显示详细的诊断信息（如果有）
+                    if (response.diagnostic_info) {
+                        console.log('🔍 详细诊断信息:', response.diagnostic_info);
+                        console.log('💡 解决方案:', response.solutions);
+                        console.log('📋 错误摘要:', response.details);
+                        
+                        addLogEntry('详细诊断信息已输出到控制台', 'info');
+                        
+                        // 显示每个环境检查项的详情
+                        for (const [category, info] of Object.entries(response.diagnostic_info)) {
+                            addLogEntry(`${category}:`, 'error');
+                            if (info.details) {
+                                info.details.forEach(detail => {
+                                    addLogEntry(`  ${detail}`, 'error');
+                                });
+                            }
+                            if (info.solutions && info.solutions.length > 0) {
+                                addLogEntry(`  解决方案:`, 'warning');
+                                info.solutions.forEach((solution, index) => {
+                                    addLogEntry(`    ${index + 1}. ${solution}`, 'warning');
+                                });
+                            }
+                        }
+                    }
+                    
                     throw new Error(response.error || '翻译失败');
                 }
                 
@@ -2103,6 +2127,11 @@
                 addLogEntry(`处理失败: ${error.message}`, 'error');
                 showStatusMessage(error.message, 'error');
                 console.error('Translation error:', error);
+                
+                // 如果错误来自fetch响应，尝试获取更多错误信息
+                if (error.response) {
+                    console.error('Response details:', error.response);
+                }
             }
         }
 
@@ -2121,108 +2150,45 @@
             }
 
             const response = await fetch(url, options);
-            return await response.json();
+            const jsonResponse = await response.json();
+            
+            // 如果HTTP状态码表示错误，但响应中有详细信息，仍然返回响应内容
+            if (!response.ok && jsonResponse) {
+                console.error(`HTTP Error ${response.status}:`, jsonResponse);
+            }
+            
+            return jsonResponse;
         }
-
-        // function displayResult(result) {
-        //     hideLoading();
-
-        //     // 生成预览内容
-        //     const previewContent = generatePreviewContent(result);
-            
-        //     // 生成详情内容
-        //     const detailsContent = generateDetailsContent(result);
-            
-        //     // 更新预览区域
-        //     const resultPreview = document.getElementById('result-preview');
-        //     resultPreview.innerHTML = previewContent;
-            
-        //     // 更新详情区域
-        //     const resultDetails = document.getElementById('result-details');
-        //     resultDetails.innerHTML = detailsContent;
-
-        //     // 保存结果数据
-        //     translationResult = result;
-
-        //     // 显示相应的下载按钮
-        //     showDownloadButtons(result);
-            
-        //     // 如果有PDF预览，测试URL可访问性
-        //     if ((currentTranslationType === 'poster' && result.pdf_generated) ||
-        //         (currentTranslationType.startsWith('webpage') && result.download_url)) {
-        //         setTimeout(() => testPdfUrls(result), 1000);
-        //     }
-        // }
 
         function displayResult(result) {
-        hideLoading();
-        translationResult = result; // 保存结果以供下载
+            hideLoading();
 
-        const resultPreview = document.getElementById('result-preview');
-        const resultDetails = document.getElementById('result-details');
-        
-        let previewContent = '';
-        let detailsContent = '';
-
-        try {
-            // --- 根据不同的翻译类型生成预览和详情 ---
-            const filename = result.pdf_filename || result.translated_filename;
-            if (!filename) {
-                // 如果后端没有返回有效的文件名，则显示错误
-                if (currentTranslationType === 'baidu-image' && result.has_translated_image === false) {
-                     // 图片翻译只返回文本，是正常情况
-                } else {
-                    throw new Error(result.error || '后端未返回有效的文件名。');
-                }
-            }
+            // 生成预览内容
+            const previewContent = generatePreviewContent(result);
             
-            // --- 关键修正：对所有文件名进行URL编码 ---
-            const encodedFilename = encodeURIComponent(filename);
-            let previewUrlPath = '';
-
-            if (currentTranslationType === 'poster') {
-                previewUrlPath = `/preview/poster/${encodedFilename}`;
-            } else if (currentTranslationType === 'webpage-google') {
-                previewUrlPath = `/preview/translated/${encodedFilename}`;
-            } else if (currentTranslationType === 'webpage-gpt') {
-                const folder = result.folder_name;
-                previewUrlPath = `/preview/workflow/${folder}/${encodedFilename}`;
-            }
-
-            if (previewUrlPath) {
-                const fullPreviewUrl = `${backendUrl}${previewUrlPath}`;
-                previewContent = `<iframe src="${fullPreviewUrl}" class="preview-iframe" title="翻译结果PDF预览"></iframe>`;
-            } else if (currentTranslationType === 'baidu-image') {
-                // 对于图片翻译，我们仍然推荐使用Base64，但如果坚持URL方式，需要后端返回正确的URL
-                // 这里暂时保持原样，因为图片预览问题更复杂
-                 if (result.has_translated_image && result.download_url) {
-                    const originalImageUrl = result.original_image_url ? `${backendUrl}${result.original_image_url}` : '';
-                    const translatedImageUrl = result.download_url ? `${backendUrl}${result.download_url}` : '';
-                    previewContent = `
-                        <div class="preview-image-container horizontal">
-                            <div class="preview-image-item"><h4>原始图片</h4><img src="${originalImageUrl}" alt="原始图片" class="preview-image"></div>
-                            <div class="preview-image-item"><h4>翻译后图片</h4><img src="${translatedImageUrl}" alt="翻译后图片" class="preview-image"></div>
-                        </div>`;
-                }
-            }
+            // 生成详情内容
+            const detailsContent = generateDetailsContent(result);
             
-            detailsContent = generateDetailsContent(result);
+            // 更新预览区域
+            const resultPreview = document.getElementById('result-preview');
+            resultPreview.innerHTML = previewContent;
+            
+            // 更新详情区域
+            const resultDetails = document.getElementById('result-details');
+            resultDetails.innerHTML = detailsContent;
+
+            // 保存结果数据
+            translationResult = result;
+
+            // 显示相应的下载按钮
             showDownloadButtons(result);
             
-            // 更新UI
-            resultPreview.innerHTML = previewContent || '<div class="preview-placeholder"><h3>无可用预览</h3></div>';
-            resultDetails.innerHTML = detailsContent;
-            showStatusMessage('翻译完成！', 'success');
-
-        } catch (error) {
-            // 统一的错误处理
-            resultPreview.innerHTML = `<div class="preview-placeholder"><div class="placeholder-icon" style="color: #ef4444;">❌</div><div class="placeholder-text"><h3>处理失败</h3><p>${error.message}</p></div></div>`;
-            resultDetails.innerHTML = `<div class="details-placeholder"><p>详细信息不可用</p></div>`;
-            showStatusMessage(`处理失败: ${error.message}`, 'error');
-            console.error("Display result error:", error);
+            // 如果有PDF预览，测试URL可访问性
+            if ((currentTranslationType === 'poster' && result.pdf_generated) ||
+                (currentTranslationType.startsWith('webpage') && result.download_url)) {
+                setTimeout(() => testPdfUrls(result), 1000);
+            }
         }
-    }
-
 
         // 测试PDF URL的可访问性
         async function testPdfUrls(result) {

@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>集成翻译平台 - 增强版</title>
+    <title>移民材料翻译</title>
     <style>
+        :root {
+            --screen-width: 100vw;
+            --screen-height: 100vh;
+            --device-pixel-ratio: 1;
+            --aspect-ratio: 1.33;
+            --base-font-size: 16px;
+            --container-padding: 20px;
+            --panel-spacing: 15px;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -845,22 +855,130 @@
             background: linear-gradient(180deg, #1d4ed8, #1e40af);
         }
 
-        /* 响应式设计 */
-        @media (max-width: 768px) {
+        /* 响应式设计 - 多断点适配 */
+        
+        /* 超大屏幕 (1920px+) */
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1800px;
+                padding: 0 40px;
+            }
+            
+            .left-panel {
+                flex: 0 0 500px;
+                padding: 40px;
+            }
+            
+            .header h1 {
+                font-size: 2.8em;
+            }
+            
+            .radio-item {
+                padding: 22px;
+            }
+            
+            .process-btn {
+                padding: 28px 38px;
+                font-size: 22px;
+            }
+        }
+        
+        /* 大屏幕 (1440px - 1919px) */
+        @media (min-width: 1440px) and (max-width: 1919px) {
+            .container {
+                max-width: 1600px;
+                padding: 0 30px;
+            }
+            
+            .left-panel {
+                flex: 0 0 480px;
+                padding: 35px;
+            }
+            
+            .header h1 {
+                font-size: 2.6em;
+            }
+            
+            .process-btn {
+                padding: 26px 34px;
+                font-size: 21px;
+            }
+        }
+        
+        /* 中等屏幕 (1024px - 1439px) */
+        @media (min-width: 1024px) and (max-width: 1439px) {
+            .container {
+                max-width: 1200px;
+                padding: 0 20px;
+            }
+            
+            .left-panel {
+                flex: 0 0 420px;
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .process-btn {
+                padding: 22px 28px;
+                font-size: 18px;
+            }
+        }
+        
+        /* 平板横屏 (768px - 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .container {
+                flex-direction: row;
+                max-width: 100%;
+                padding: 0 15px;
+            }
+            
+            .left-panel {
+                flex: 0 0 350px;
+                padding: 20px;
+            }
+            
+            .right-panel {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .radio-item {
+                padding: 16px;
+            }
+            
+            .process-btn {
+                padding: 20px 24px;
+                font-size: 16px;
+            }
+            
+            .result-preview-content {
+                min-height: 300px;
+            }
+        }
+        
+        /* 平板竖屏和小屏幕 (480px - 767px) */
+        @media (min-width: 480px) and (max-width: 767px) {
             .container {
                 flex-direction: column;
                 border-radius: 0;
+                padding: 0;
             }
 
             .left-panel {
                 flex: none;
                 border-right: none;
                 border-bottom: 1px solid rgba(59, 130, 246, 0.3);
-                padding-bottom: 100px; /* 为固定按钮留出空间 */
+                padding: 20px;
             }
 
             .right-panel {
-                padding: 20px;
+                padding: 15px;
             }
 
             .result-preview-section {
@@ -882,9 +1000,65 @@
                 max-height: 200px;
             }
 
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .file-upload-area {
+                padding: 18px 15px;
+            }
+
+            .radio-item {
+                padding: 14px;
+            }
+
+            .process-btn {
+                padding: 18px 20px;
+                font-size: 16px;
+            }
+        }
+        
+        /* 手机 (max-width: 479px) */
+        @media (max-width: 479px) {
+            .container {
+                flex-direction: column;
+                border-radius: 0;
+                padding: 0;
+            }
+
+            .left-panel {
+                flex: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+                padding: 15px;
+            }
+
+            .right-panel {
+                padding: 10px;
+            }
+
+            .result-preview-section {
+                margin-bottom: 10px;
+                padding: 10px;
+                min-height: 200px;
+            }
+
+            .result-details-section {
+                padding: 10px;
+            }
+
+            .result-preview-content {
+                min-height: 180px;
+                padding: 10px;
+            }
+
+            .result-details-content {
+                max-height: 150px;
+            }
+
             .preview-image-container {
                 flex-direction: column !important;
-                gap: 10px;
+                gap: 8px;
                 padding: 5px;
             }
 
@@ -901,50 +1075,83 @@
             .preview-image-container.horizontal .preview-image,
             .preview-image-container.vertical .preview-image {
                 max-width: calc(100% - 10px);
-                max-height: calc(40% - 30px);
+                max-height: calc(35% - 25px);
                 width: auto;
                 height: auto;
             }
 
             .download-buttons {
                 flex-direction: column;
+                gap: 8px;
             }
 
             .header h1 {
-                font-size: 2em;
+                font-size: 1.4em;
             }
 
             .file-upload-area {
-                padding: 20px 15px;
+                padding: 15px 10px;
             }
 
             .radio-item {
-                padding: 15px;
+                padding: 12px;
             }
 
             .process-btn {
-                bottom: 20px;
-                left: 20px;
-                right: 20px;
-                width: auto;
-                min-width: auto;
-                text-align: center;
+                padding: 16px 18px;
+                font-size: 14px;
             }
 
             .placeholder-icon {
-                font-size: 36px;
+                font-size: 32px;
             }
 
             .placeholder-text h3 {
-                font-size: 1.1em;
+                font-size: 1em;
             }
 
             .preview-code-container {
-                font-size: 11px;
-                padding: 10px;
+                font-size: 10px;
+                padding: 8px;
+            }
+            
+            /* 优化小屏幕上的输入区域 */
+            .input-group input, 
+            .input-group textarea, 
+            .input-group select {
+                padding: 12px 14px;
+                font-size: 16px; /* 防止iOS缩放 */
             }
         }
 
+        /* 触摸设备优化 */
+        .touch-device .radio-item {
+            min-height: 48px; /* 符合触摸标准 */
+        }
+        
+        .touch-device .process-btn {
+            min-height: 48px;
+        }
+        
+        .touch-device button {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .touch-device .file-upload-btn {
+            min-height: 48px;
+        }
+        
+        /* 高分辨率屏幕优化 */
+        .retina {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .retina .radio-item {
+            border-width: 0.5px;
+        }
+        
         /* 添加焦点样式 */
         button:focus, input:focus, select:focus {
             outline: 2px solid rgba(59, 130, 246, 0.5);
@@ -989,12 +1196,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 390px;
-            z-index: 1000;
-            margin: 0;
+            width: 100%;
+            margin-top: 0px;
             overflow: hidden;
             box-shadow: 
                 0 8px 25px rgba(16, 185, 129, 0.4),
@@ -1339,7 +1542,7 @@
         <!-- 左侧面板 -->
         <div class="left-panel">
             <div class="header">
-                <h1>翻译平台<span class="version-badge">V1.41</span></h1>
+                <h1>移民材料翻译<span class="version-badge">V1.41</span></h1>
               
             </div>
 
@@ -1536,7 +1739,7 @@
 
                 <div id="result-preview" class="result-preview-content">
                     <div class="preview-placeholder">
-                        <div class="placeholder-icon">📄</div>
+                        <div class="placeholder-icon">···</div>
                         <div class="placeholder-text">
                             <h3>等待翻译结果</h3>
                             <p>请选择翻译类型并提供内容以开始翻译</p>
@@ -1545,7 +1748,7 @@
                     
                         <div class="loading" id="loading">
                             <div class="spinner"></div>
-                            <p id="loading-text">正在处理中，请稍候...</p>
+                            <p id="loading-text">翻译处理中...</p>
                         </div>
                 </div>
             </div>
@@ -1580,6 +1783,172 @@
         let backendUrl = 'https://filetrans2.0.drziangchen.uk';
         let logUpdateInterval = null;
 
+        // 屏幕分辨率检测和自适应布局
+        function detectScreenSize() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            const screenType = getScreenType(width);
+            
+            return {
+                width,
+                height,
+                dpr,
+                screenType,
+                isRetina: dpr > 1,
+                isLandscape: width > height,
+                aspectRatio: (width / height).toFixed(2)
+            };
+        }
+        
+        function getScreenType(width) {
+            if (width >= 1920) return 'ultra-wide';
+            if (width >= 1440) return 'large';
+            if (width >= 1024) return 'medium';
+            if (width >= 768) return 'tablet-landscape';
+            if (width >= 480) return 'tablet-portrait';
+            return 'mobile';
+        }
+        
+        function applyAdaptiveLayout() {
+            const screenInfo = detectScreenSize();
+            const body = document.body;
+            
+            // 移除所有之前的屏幕类型类
+            body.classList.remove('ultra-wide', 'large', 'medium', 'tablet-landscape', 'tablet-portrait', 'mobile');
+            body.classList.remove('retina', 'landscape', 'portrait');
+            
+            // 添加当前屏幕类型类
+            body.classList.add(screenInfo.screenType);
+            
+            if (screenInfo.isRetina) {
+                body.classList.add('retina');
+            }
+            
+            if (screenInfo.isLandscape) {
+                body.classList.add('landscape');
+            } else {
+                body.classList.add('portrait');
+            }
+            
+            // 设置CSS自定义属性
+            document.documentElement.style.setProperty('--screen-width', screenInfo.width + 'px');
+            document.documentElement.style.setProperty('--screen-height', screenInfo.height + 'px');
+            document.documentElement.style.setProperty('--device-pixel-ratio', screenInfo.dpr);
+            document.documentElement.style.setProperty('--aspect-ratio', screenInfo.aspectRatio);
+            
+            // 动态调整字体大小
+            adjustFontSizes(screenInfo);
+            
+            // 动态调整容器布局
+            adjustContainerLayout(screenInfo);
+            
+            console.log('📱 屏幕信息:', {
+                尺寸: `${screenInfo.width}x${screenInfo.height}`,
+                类型: screenInfo.screenType,
+                像素比: screenInfo.dpr,
+                方向: screenInfo.isLandscape ? '横屏' : '竖屏',
+                高分辨率: screenInfo.isRetina ? '是' : '否'
+            });
+        }
+        
+        function adjustFontSizes(screenInfo) {
+            const baseSize = calculateBaseFontSize(screenInfo);
+            document.documentElement.style.setProperty('--base-font-size', baseSize + 'px');
+            
+            // 根据屏幕尺寸调整根字体大小
+            if (screenInfo.width <= 479) {
+                document.documentElement.style.fontSize = '14px';
+            } else if (screenInfo.width <= 767) {
+                document.documentElement.style.fontSize = '15px';
+            } else if (screenInfo.width <= 1023) {
+                document.documentElement.style.fontSize = '16px';
+            } else if (screenInfo.width <= 1439) {
+                document.documentElement.style.fontSize = '17px';
+            } else {
+                document.documentElement.style.fontSize = '18px';
+            }
+        }
+        
+        function calculateBaseFontSize(screenInfo) {
+            const minSize = 14;
+            const maxSize = 20;
+            const minWidth = 320;
+            const maxWidth = 1920;
+            
+            const ratio = Math.min(Math.max((screenInfo.width - minWidth) / (maxWidth - minWidth), 0), 1);
+            return Math.round(minSize + (maxSize - minSize) * ratio);
+        }
+        
+        function adjustContainerLayout(screenInfo) {
+            const container = document.querySelector('.container');
+            const leftPanel = document.querySelector('.left-panel');
+            
+            if (!container || !leftPanel) return;
+            
+            // 超大屏幕优化
+            if (screenInfo.screenType === 'ultra-wide') {
+                container.style.maxWidth = '1800px';
+                if (screenInfo.width >= 2560) {
+                    leftPanel.style.flex = '0 0 600px';
+                }
+            }
+            
+            // 移动设备优化
+            if (screenInfo.screenType === 'mobile') {
+                // 优化移动端滚动性能
+                container.style.webkitOverflowScrolling = 'touch';
+                container.style.overflowY = 'auto';
+            }
+        }
+        
+        function optimizeForMobile() {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            
+            if (isMobile || isTouchDevice) {
+                document.body.classList.add('touch-device');
+                
+                // 优化触摸体验
+                const radioItems = document.querySelectorAll('.radio-item');
+                radioItems.forEach(item => {
+                    item.style.touchAction = 'manipulation';
+                });
+                
+                // 防止iOS双击缩放
+                const buttons = document.querySelectorAll('button');
+                buttons.forEach(button => {
+                    button.style.touchAction = 'manipulation';
+                });
+            }
+        }
+        
+        // 监听屏幕尺寸变化
+        function setupResizeListener() {
+            let resizeTimeout;
+            
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    applyAdaptiveLayout();
+                    
+                    // 重新优化图片布局
+                    const imageContainers = document.querySelectorAll('[id^="image-container-"]');
+                    imageContainers.forEach(container => {
+                        const containerId = container.id;
+                        setTimeout(() => optimizeImageLayout(containerId), 100);
+                    });
+                }, 150);
+            });
+            
+            // 监听设备方向变化
+            window.addEventListener('orientationchange', function() {
+                setTimeout(() => {
+                    applyAdaptiveLayout();
+                }, 300);
+            });
+        }
+
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
             setupEventListeners();
@@ -1587,6 +1956,11 @@
             
             // 设置周期性后端状态检查（每10秒一次）
             setInterval(checkBackendStatus, 10000);
+            
+            // 初始化自适应布局
+            applyAdaptiveLayout();
+            setupResizeListener();
+            optimizeForMobile();
             
             // 确保显示正确的默认输入区域
             updateInputSection();
@@ -1610,12 +1984,15 @@
             console.log('  - testCurrentPdf() - 测试当前翻译结果的PDF');
             console.log('  - testPdfInfrastructure() - 测试PDF预览基础设施');
             console.log('  - checkPdfSupport() - 检查PDF支持');
+            console.log('  - applyAdaptiveLayout() - 重新应用自适应布局');
+            console.log('  - detectScreenSize() - 检测当前屏幕信息');
             console.log('💡 提示: 翻译完成后可使用控制台命令进行调试');
             console.log('🧪 如果PDF预览有问题，请先运行 testPdfInfrastructure() 进行基础测试');
             
-            addLogEntry('翻译平台前端已加载 - 修复版 v2.5 (PDF预览+高级调试)', 'success');
-            addLogEntry('运行 testPdfInfrastructure() 测试PDF预览基础设施', 'info');
-            addLogEntry('如有PDF预览问题，查看控制台调试信息', 'info');
+            const screenInfo = detectScreenSize();
+            addLogEntry(`移民材料翻译平台前端已加载 - 响应式版 v3.0 (${screenInfo.width}x${screenInfo.height})`, 'success');
+            addLogEntry(`当前屏幕类型: ${screenInfo.screenType} (${screenInfo.isLandscape ? '横屏' : '竖屏'})`, 'info');
+            addLogEntry('自适应布局已启用，支持多种屏幕尺寸', 'success');
         });
 
         // 处理海报文件选择
@@ -1844,17 +2221,31 @@
             }
         }
 
-        function showLoading(text = '正在处理中，请稍候...') {
+        function showLoading(text = '翻译处理中...') {
             document.getElementById('loading-text').textContent = text;
             document.getElementById('loading').classList.add('show');
             document.querySelectorAll('.download-btn').forEach(btn => btn.style.display = 'none');
             document.getElementById('process-btn').disabled = true;
             hideStatusMessage();
+            
+            // 隐藏占位符内容，避免与加载状态重叠
+            const placeholders = document.querySelectorAll('.preview-placeholder');
+            placeholders.forEach(placeholder => {
+                placeholder.style.display = 'none';
+            });
         }
 
         function hideLoading() {
             document.getElementById('loading').classList.remove('show');
             document.getElementById('process-btn').disabled = false;
+            
+            // 如果没有翻译结果，重新显示占位符
+            if (!translationResult) {
+                const placeholders = document.querySelectorAll('.preview-placeholder');
+                placeholders.forEach(placeholder => {
+                    placeholder.style.display = 'block';
+                });
+            }
         }
 
         function showStatusMessage(message, type) {
@@ -1920,7 +2311,7 @@
             // 重置预览区域
             resultPreview.innerHTML = `
                 <div class="preview-placeholder">
-                    <div class="placeholder-icon">📄</div>
+                    <div class="placeholder-icon">···</div>
                     <div class="placeholder-text">
                         <h3>等待翻译结果</h3>
                         <p>请选择翻译类型并提供内容以开始翻译</p>
@@ -1928,7 +2319,7 @@
                 </div>
                 <div class="loading" id="loading">
                     <div class="spinner"></div>
-                    <p id="loading-text">正在处理中，请稍候...</p>
+                    <p id="loading-text">翻译处理中...</p>
                 </div>
             `;
             
@@ -1993,7 +2384,7 @@
                         endpoint = '/api/poster-translate';
                         isFormData = true;
                         isValid = true;
-                        showLoading('正在分析海报图像...');
+                        showLoading('海报翻译中...');
                         break;
                     
                     case 'webpage-gpt':
@@ -2014,7 +2405,7 @@
                         
                         endpoint = '/api/webpage-gpt-translate';
                         isValid = true;
-                        showLoading('正在获取网页内容...');
+                        showLoading('网页翻译中...');
                         break;
                     
                     case 'webpage-google':
@@ -2034,7 +2425,7 @@
                         
                         endpoint = '/api/webpage-google-translate';
                         isValid = true;
-                        showLoading('正在使用稳定版翻译...');
+                        showLoading('网页翻译中...');
                         break;
 
                     case 'baidu-image':
@@ -2075,7 +2466,7 @@
                         endpoint = '/api/image-translate';
                         isFormData = true;
                         isValid = true;
-                        showLoading('正在进行图片翻译...');
+                        showLoading('图片翻译中...');
                         break;
                 }
 
@@ -2763,6 +3154,8 @@
         window.testPdfPreview = function(url) {
             window.open(url, '_blank');
         };
+        window.detectScreenSize = detectScreenSize;
+        window.applyAdaptiveLayout = applyAdaptiveLayout;
         window.testCurrentPdf = function() {
             if (!translationResult) {
                 console.log('❌ 当前没有翻译结果');

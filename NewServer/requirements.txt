@@ -1,0 +1,27 @@
+# 新版后端依赖包
+Flask==2.3.3
+Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.0.5
+Flask-Migrate==4.0.5
+Flask-JWT-Extended==4.5.3
+Werkzeug==2.3.7
+
+# 数据库
+SQLAlchemy==2.0.21
+
+# Web爬虫和浏览器控制
+selenium==4.15.2
+requests==2.31.0
+beautifulsoup4==4.12.2
+
+# OpenAI API
+openai==1.3.5
+
+# 图像处理
+Pillow==10.0.1
+
+# PDF处理 (可选)
+pyppeteer==1.0.2
+
+# 其他工具
+python-dotenv==1.0.0

@@ -1,0 +1,60 @@
+.notification {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  background: white;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  box-shadow: var(--shadow-lg);
+  border-left: 4px solid var(--accent-green);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1002;
+  max-width: 300px;
+  min-width: 250px;
+}
+
+.notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification.error {
+  border-left-color: var(--accent-red);
+}
+
+.notification.warning {
+  border-left-color: var(--secondary-gold);
+}
+
+.title {
+  font-weight: 600;
+  color: var(--neutral-800);
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.message {
+  color: var(--neutral-600);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .notification {
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+    transform: translateY(-100%);
+  }
+  
+  .notification.show {
+    transform: translateY(0);
+  }
+}
+
+
+

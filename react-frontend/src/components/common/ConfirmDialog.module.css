@@ -1,0 +1,125 @@
+/* 确认对话框 - 统一系统风格 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+.dialog {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 400px;
+  width: 90vw;
+  overflow: hidden;
+  animation: dialogSlideIn 0.3s ease-out;
+}
+
+@keyframes dialogSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.header {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.body {
+  padding: 1.5rem;
+}
+
+.message {
+  color: var(--neutral-700);
+  line-height: 1.5;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.footer {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.btnPrimary {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.btnPrimary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btnDanger {
+  background: #dc2626;
+  color: white;
+}
+
+.btnDanger:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.btnCancel {
+  background: var(--neutral-200);
+  color: var(--neutral-700);
+}
+
+.btnCancel:hover {
+  background: var(--neutral-300);
+  transform: translateY(-1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .dialog {
+    margin: 1rem;
+  }
+  
+  .footer {
+    flex-direction: column-reverse;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+

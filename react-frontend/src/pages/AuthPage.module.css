@@ -1,0 +1,163 @@
+.authPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--neutral-900) 0%, var(--primary-blue-dark) 100%);
+  position: relative;
+}
+
+.backBtn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--neutral-200);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+}
+
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-2px);
+}
+
+.authContainer {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 3rem;
+  max-width: 400px;
+  width: 100%;
+  margin: 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-xl);
+}
+
+.authHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.authTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--neutral-100);
+  margin-bottom: 0.5rem;
+}
+
+.authSubtitle {
+  color: var(--neutral-400);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formLabel {
+  display: block;
+  font-weight: 600;
+  color: var(--neutral-200);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--neutral-100);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--primary-blue-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.formInput::placeholder {
+  color: var(--neutral-400);
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 0.875rem;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--primary-blue-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.submitBtn:disabled {
+  background: var(--neutral-600);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.authSwitch {
+  text-align: center;
+  color: var(--neutral-400);
+  font-size: 0.9rem;
+}
+
+.authSwitch a {
+  color: var(--primary-blue-light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.authSwitch a:hover {
+  color: var(--primary-blue);
+  text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .authContainer {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .authTitle {
+    font-size: 1.75rem;
+  }
+  
+  .backBtn {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+
+
+
+
+

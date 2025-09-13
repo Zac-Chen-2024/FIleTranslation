@@ -1,0 +1,93 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  min-width: 400px;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--neutral-800);
+  margin-bottom: 1rem;
+}
+
+.progressContainer {
+  background: var(--neutral-200);
+  border-radius: 8px;
+  height: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBar {
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 8px;
+  position: relative;
+}
+
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.progressText {
+  color: var(--neutral-600);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .modal {
+    min-width: 300px;
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.1rem;
+  }
+}
+
+
+

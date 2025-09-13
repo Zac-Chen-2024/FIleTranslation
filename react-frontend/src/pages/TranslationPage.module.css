@@ -1,0 +1,160 @@
+.translation {
+  min-height: 100vh;
+  background: var(--neutral-100);
+  color: var(--neutral-800);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: white;
+  border-bottom: 1px solid var(--neutral-200);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.clientInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backBtn {
+  background: var(--neutral-200);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  color: var(--neutral-700);
+}
+
+.backBtn:hover {
+  background: var(--neutral-300);
+  transform: translateX(-2px);
+}
+
+.clientName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.actionBtn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btnAdd {
+  background: var(--accent-green);
+  color: white;
+}
+
+.btnAdd:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btnExport {
+  background: var(--secondary-gold);
+  color: white;
+}
+
+.btnExport:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 20% 70%;
+  gap: 2rem;
+  padding: 2rem 5%; /* 左右各5%的空白，总共10% */
+  margin: 0; /* 移除auto居中，直接占满容器 */
+  flex: 1;
+  width: 100%;
+  max-width: none; /* 移除最大宽度限制 */
+}
+
+.loadingContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--neutral-100);
+  color: var(--neutral-600);
+  gap: 1rem;
+}
+
+.loadingContainer button {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loadingContainer button:hover {
+  background: var(--primary-blue-light);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 3%; /* 小屏幕减少左右空白 */
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .clientInfo {
+    justify-content: space-between;
+  }
+  
+  .actions {
+    justify-content: center;
+  }
+  
+  .content {
+    padding: 1rem 2%; /* 手机端更少的左右空白 */
+    gap: 1rem;
+  }
+  
+  .clientName {
+    font-size: 1.25rem;
+  }
+}
+
+
+
+
+

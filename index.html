@@ -1,0 +1,3366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移民材料翻译</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%233b82f6'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='60' fill='white'>译</text></svg>" type="image/svg+xml">
+    <style>
+        :root {
+            --screen-width: 100vw;
+            --screen-height: 100vh;
+            --device-pixel-ratio: 1;
+            --aspect-ratio: 1.33;
+            --base-font-size: 16px;
+            --container-padding: 20px;
+            --panel-spacing: 15px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 添加动态背景效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 50px rgba(59, 130, 246, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .left-panel {
+            flex: 0 0 450px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-right: 1px solid rgba(59, 130, 246, 0.2);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(59, 130, 246, 0.6),
+                rgba(147, 51, 234, 0.6),
+                transparent
+            );
+        }
+
+        .right-panel {
+            flex: 1;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header h1 {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.4em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .header p {
+            color: #cbd5e1;
+            font-size: 1.1em;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff !important;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.6em;
+            margin-left: 8px;
+            font-weight: 600;
+            box-shadow: 
+                0 2px 8px rgba(59, 130, 246, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            -webkit-text-fill-color: #ffffff !important;
+            background-clip: padding-box !important;
+            -webkit-background-clip: padding-box !important;
+        }
+
+        .translation-options {
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            margin-bottom: 25px;
+        }
+
+        .option-label {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #f8fafc;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #3b82f6, transparent);
+            padding: 8px 0;
+            border-left: 3px solid #3b82f6;
+            padding-left: 12px;
+        }
+
+        .sub-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #f8fafc;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.6), transparent);
+            padding: 6px 0;
+            border-left: 2px solid rgba(59, 130, 246, 0.8);
+            padding-left: 10px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .radio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(59, 130, 246, 0.08), 
+                transparent
+            );
+            transition: left 0.3s ease;
+        }
+
+        .radio-item:hover::before {
+            left: 100%;
+        }
+
+        .radio-item:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 
+                0 10px 25px rgba(59, 130, 246, 0.15),
+                0 0 0 1px rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.03);
+        }
+
+        .radio-item.active {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.08), 
+                rgba(147, 51, 234, 0.03)
+            );
+            box-shadow: 
+                0 0 20px rgba(59, 130, 246, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .radio-item input[type="radio"] {
+            display: none;
+        }
+
+        .radio-item label {
+            cursor: pointer;
+            font-weight: 500;
+            flex: 1;
+            color: #f8fafc;
+            font-size: 1.05em;
+        }
+
+        .radio-item .description {
+            font-size: 0.9em;
+            color: #cbd5e1;
+            margin-top: 4px;
+            font-weight: 300;
+        }
+
+        .radio-item.active {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.25), 
+                rgba(147, 51, 234, 0.15)
+            );
+            box-shadow: 
+                0 0 25px rgba(59, 130, 246, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .radio-item.active label {
+            color: #ffffff;
+        }
+
+        .radio-item.active .description {
+            color: #e2e8f0;
+        }
+
+        .input-section {
+            margin-top: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #f8fafc;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: rgba(15, 23, 42, 0.8);
+            color: #f1f5f9;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 
+                0 0 0 3px rgba(59, 130, 246, 0.1),
+                0 0 20px rgba(59, 130, 246, 0.15);
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .file-upload-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        /* 增强版文件上传样式 */
+        .file-upload-enhanced {
+            width: 100%;
+        }
+
+        .file-upload-area {
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload-area::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(59, 130, 246, 0.1),
+                transparent
+            );
+            animation: rotate 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .file-upload-area:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .file-upload-area:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .file-upload-icon {
+            font-size: 24px;
+            margin-bottom: 15px;
+            opacity: 0.7;
+            font-weight: 700;
+            color: #3b82f6;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .file-upload-text {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .primary-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #f1f5f9;
+            margin-bottom: 8px;
+        }
+
+        .secondary-text {
+            font-size: 14px;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .file-size-hint {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .file-upload-area .file-upload-btn {
+            display: inline-block;
+            width: auto;
+            padding: 12px 24px;
+            margin: 0;
+            border-radius: 6px;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 文件预览样式 */
+        .file-preview {
+            margin-top: 15px;
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            height: 200px; /* 匹配上传区域的高度 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-header {
+            background: linear-gradient(90deg, 
+                rgba(59, 130, 246, 0.1), 
+                rgba(147, 51, 234, 0.05)
+            );
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0; /* 防止收缩 */
+            height: 36px; /* 固定头部高度，减小以匹配总高度 */
+        }
+
+        .preview-title {
+            font-weight: 500;
+            color: #f1f5f9;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .remove-file-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        .remove-file-btn:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .preview-content {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            font-size: 1.1em;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        .preview-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(147, 51, 234, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .preview-content.has-content {
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: #f1f5f9;
+        }
+
+        /* 图片预览样式 - 固定大小和比例缩放 */
+        .preview-image {
+            width: 100px;
+            height: 80px;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 6px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0; /* 防止图片被压缩 */
+        }
+
+        /* 调整图片预览时的preview-content */
+        .preview-content.image-preview {
+            padding: 30px 20px; /* 与file-upload-area保持一致 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1; /* 占用剩余空间 */
+            gap: 10px;
+        }
+
+        /* 文件信息样式调整 */
+        .file-info {
+            flex: 1;
+            margin-left: 12px;
+            padding: 8px;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            min-width: 0; /* 允许内容收缩 */
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 4px;
+            word-break: break-word;
+            font-size: 0.8em;
+            line-height: 1.2;
+        }
+
+        .file-size, .file-type {
+            font-size: 0.7em;
+            color: #cbd5e1;
+            margin-bottom: 2px;
+            line-height: 1.1;
+        }
+
+        /* 图片和文件信息的容器 */
+        .image-info-container {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            gap: 0;
+        }
+
+        .result-content {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-item {
+            margin-bottom: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.05), 
+                rgba(147, 51, 234, 0.02)
+            );
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item h4 {
+            margin-bottom: 12px;
+            color: #f1f5f9;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-item p {
+            margin: 8px 0;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .result-item .success {
+            color: #10b981;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .result-item .error {
+            color: #ef4444;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #3b82f6;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid rgba(59, 130, 246, 0.2);
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-message {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid;
+        }
+
+        .status-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+        }
+
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.1);
+        }
+
+        .status-message.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
+        }
+
+        .log-container {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 12px;
+            display: none;
+            backdrop-filter: blur(15px);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .log-container.show {
+            display: block;
+        }
+
+        .log-entry {
+            margin-bottom: 6px;
+            padding: 4px 0;
+            border-left: 2px solid transparent;
+            padding-left: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .log-entry:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-left-color: #3b82f6;
+        }
+
+        .log-entry.info { 
+            color: #3b82f6; 
+            border-left-color: rgba(59, 130, 246, 0.3);
+        }
+        .log-entry.success { 
+            color: #10b981; 
+            border-left-color: rgba(16, 185, 129, 0.3);
+        }
+        .log-entry.warning { 
+            color: #f59e0b; 
+            border-left-color: rgba(245, 158, 11, 0.3);
+        }
+        .log-entry.error { 
+            color: #ef4444; 
+            border-left-color: rgba(239, 68, 68, 0.3);
+        }
+        .log-entry.debug { 
+            color: #8b5cf6; 
+            border-left-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .backend-status {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .backend-status::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                #64748b, 
+                #3b82f6, 
+                #64748b
+            );
+        }
+
+        .backend-status.connected::before {
+            background: linear-gradient(90deg, 
+                #10b981, 
+                #34d399, 
+                #10b981
+            );
+        }
+
+        .backend-status.error::before {
+            background: linear-gradient(90deg, 
+                #ef4444, 
+                #f87171, 
+                #ef4444
+            );
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #64748b;
+            animation: pulse-dot 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.1);
+            }
+        }
+
+        .status-text {
+            color: #f8fafc;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .backend-status p {
+            color: #cbd5e1;
+            margin: 5px 0 0 22px;
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #1d4ed8, #1e40af);
+        }
+
+        /* 响应式设计 - 多断点适配 */
+        
+        /* 超大屏幕 (1920px+) */
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1800px;
+                padding: 0 40px;
+            }
+            
+            .left-panel {
+                flex: 0 0 500px;
+                padding: 40px;
+            }
+            
+            .header h1 {
+                font-size: 2.8em;
+            }
+            
+            .radio-item {
+                padding: 22px;
+            }
+            
+            .process-btn {
+                padding: 28px 38px;
+                font-size: 22px;
+            }
+        }
+        
+        /* 大屏幕 (1440px - 1919px) */
+        @media (min-width: 1440px) and (max-width: 1919px) {
+            .container {
+                max-width: 1600px;
+                padding: 0 30px;
+            }
+            
+            .left-panel {
+                flex: 0 0 480px;
+                padding: 35px;
+            }
+            
+            .header h1 {
+                font-size: 2.6em;
+            }
+            
+            .process-btn {
+                padding: 26px 34px;
+                font-size: 21px;
+            }
+        }
+        
+        /* 中等屏幕 (1024px - 1439px) */
+        @media (min-width: 1024px) and (max-width: 1439px) {
+            .container {
+                max-width: 1200px;
+                padding: 0 20px;
+            }
+            
+            .left-panel {
+                flex: 0 0 420px;
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .process-btn {
+                padding: 22px 28px;
+                font-size: 18px;
+            }
+        }
+        
+        /* 平板横屏 (768px - 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .container {
+                flex-direction: row;
+                max-width: 100%;
+                padding: 0 15px;
+            }
+            
+            .left-panel {
+                flex: 0 0 350px;
+                padding: 20px;
+            }
+            
+            .right-panel {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .radio-item {
+                padding: 16px;
+            }
+            
+            .process-btn {
+                padding: 20px 24px;
+                font-size: 16px;
+            }
+            
+            .result-preview-content {
+                min-height: 300px;
+            }
+        }
+        
+        /* 平板竖屏和小屏幕 (480px - 767px) */
+        @media (min-width: 480px) and (max-width: 767px) {
+            .container {
+                flex-direction: column;
+                border-radius: 0;
+                padding: 0;
+            }
+
+            .left-panel {
+                flex: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+                padding: 20px;
+            }
+
+            .right-panel {
+                padding: 15px;
+            }
+
+            .result-preview-section {
+                margin-bottom: 15px;
+                padding: 15px;
+                min-height: 250px;
+            }
+
+            .result-details-section {
+                padding: 15px;
+            }
+
+            .result-preview-content {
+                min-height: 200px;
+                padding: 15px;
+            }
+
+            .result-details-content {
+                max-height: 200px;
+            }
+
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .file-upload-area {
+                padding: 18px 15px;
+            }
+
+            .radio-item {
+                padding: 14px;
+            }
+
+            .process-btn {
+                padding: 18px 20px;
+                font-size: 16px;
+            }
+        }
+        
+        /* 手机 (max-width: 479px) */
+        @media (max-width: 479px) {
+            .container {
+                flex-direction: column;
+                border-radius: 0;
+                padding: 0;
+            }
+
+            .left-panel {
+                flex: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+                padding: 15px;
+            }
+
+            .right-panel {
+                padding: 10px;
+            }
+
+            .result-preview-section {
+                margin-bottom: 10px;
+                padding: 10px;
+                min-height: 200px;
+            }
+
+            .result-details-section {
+                padding: 10px;
+            }
+
+            .result-preview-content {
+                min-height: 180px;
+                padding: 10px;
+            }
+
+            .result-details-content {
+                max-height: 150px;
+            }
+
+            .preview-image-container {
+                flex-direction: column !important;
+                gap: 8px;
+                padding: 5px;
+            }
+
+            .preview-image-container.horizontal,
+            .preview-image-container.vertical {
+                flex-direction: column !important;
+            }
+
+            .preview-image-item {
+                max-width: 100%;
+                min-width: auto;
+            }
+
+            .preview-image-container.horizontal .preview-image,
+            .preview-image-container.vertical .preview-image {
+                max-width: calc(100% - 10px);
+                max-height: calc(35% - 25px);
+                width: auto;
+                height: auto;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .header h1 {
+                font-size: 1.4em;
+            }
+
+            .file-upload-area {
+                padding: 15px 10px;
+            }
+
+            .radio-item {
+                padding: 12px;
+            }
+
+            .process-btn {
+                padding: 16px 18px;
+                font-size: 14px;
+            }
+
+            .placeholder-icon {
+                font-size: 32px;
+            }
+
+            .placeholder-text h3 {
+                font-size: 1em;
+            }
+
+            .preview-code-container {
+                font-size: 10px;
+                padding: 8px;
+            }
+            
+            /* 优化小屏幕上的输入区域 */
+            .input-group input, 
+            .input-group textarea, 
+            .input-group select {
+                padding: 12px 14px;
+                font-size: 16px; /* 防止iOS缩放 */
+            }
+        }
+
+        /* 触摸设备优化 */
+        .touch-device .radio-item {
+            min-height: 48px; /* 符合触摸标准 */
+        }
+        
+        .touch-device .process-btn {
+            min-height: 48px;
+        }
+        
+        .touch-device button {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .touch-device .file-upload-btn {
+            min-height: 48px;
+        }
+        
+        /* 高分辨率屏幕优化 */
+        .retina {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .retina .radio-item {
+            border-width: 0.5px;
+        }
+        
+        /* 添加焦点样式 */
+        button:focus, input:focus, select:focus {
+            outline: 2px solid rgba(59, 130, 246, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* 选择框样式 */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233b82f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        /* 添加微妙的动画效果 */
+        .radio-item, .input-group input, .input-group select, .process-btn, .download-btn {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .process-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 24px 32px;
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            margin-top: 0px;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 25px rgba(16, 185, 129, 0.4),
+                0 0 0 1px rgba(16, 185, 129, 0.2);
+            text-align: center;
+        }
+
+        .process-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .process-btn:hover::before {
+            left: 100%;
+        }
+
+        .process-btn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 35px rgba(16, 185, 129, 0.5),
+                0 0 0 1px rgba(16, 185, 129, 0.3);
+        }
+
+        .process-btn:disabled {
+            background: linear-gradient(135deg, #374151, #1f2937);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.5;
+        }
+
+        .input-content {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .input-content.hidden {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .result-preview-section {
+            flex: 2;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .result-details-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 8px 0;
+            border-left: 3px solid #3b82f6;
+            padding-left: 12px;
+            background: linear-gradient(90deg, #3b82f6, transparent);
+        }
+
+        .preview-header h2 {
+            color: #f8fafc;
+            font-size: 1.5em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 6px 0;
+            border-left: 2px solid rgba(59, 130, 246, 0.8);
+            padding-left: 10px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.6), transparent);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .details-header h3 {
+            color: #f8fafc;
+            font-size: 0.95em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin: 0;
+        }
+
+        .result-preview-content {
+            flex: 1;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+        }
+
+        .result-details-content {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 250px;
+        }
+
+        .preview-placeholder {
+            text-align: center;
+            color: #cbd5e1;
+        }
+
+        .placeholder-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        .placeholder-text h3 {
+            color: #f1f5f9;
+            margin-bottom: 8px;
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+
+        .placeholder-text p {
+            color: #94a3b8;
+            font-size: 0.95em;
+        }
+
+        .details-placeholder {
+            text-align: center;
+            color: #94a3b8;
+            padding: 40px 20px;
+            font-style: italic;
+        }
+
+        /* 预览内容样式 */
+        .preview-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 6px;
+            background: white;
+            min-height: 400px;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* PDF容器特殊样式 */
+        .preview-pdf-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-pdf-container .pdf-fallback {
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .preview-pdf-container iframe {
+            display: block;
+        }
+
+        .preview-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            gap: 15px;
+            padding: 10px;
+        }
+
+        .preview-image-container.horizontal {
+            flex-direction: row;
+        }
+
+        .preview-image-container.vertical {
+            flex-direction: column;
+        }
+
+        .preview-image-item {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 0; /* 允许收缩 */
+        }
+
+        .preview-image-item h4 {
+            color: #f1f5f9;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .preview-image {
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 水平排列时的图片样式 */
+        .preview-image-container.horizontal .preview-image {
+            max-width: 100%;
+            max-height: calc(100% - 30px); /* 为标题预留空间 */
+            width: auto;
+            height: auto;
+        }
+
+        /* 垂直排列时的图片样式 */
+        .preview-image-container.vertical .preview-image {
+            max-width: calc(100% - 20px);
+            max-height: calc(50% - 40px); /* 为标题和间距预留空间 */
+            width: auto;
+            height: auto;
+        }
+
+        .preview-code-container {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        .preview-pdf-container {
+            width: 100%;
+            height: 100%;
+            background: #f8fafc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #334155;
+            font-size: 1.1em;
+        }
+
+        .download-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 24px 32px;
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 
+                0 8px 25px rgba(16, 185, 129, 0.4),
+                0 0 0 1px rgba(16, 185, 129, 0.2);
+            min-width: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 35px rgba(16, 185, 129, 0.5),
+                0 0 0 1px rgba(16, 185, 129, 0.3);
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧面板 -->
+        <div class="left-panel">
+            <div class="header">
+                <h1>移民材料翻译<span class="version-badge">V1.41</span></h1>
+              
+            </div>
+
+            <!-- 后端连接状态 -->
+            <div id="backend-status" class="backend-status">
+                <div class="status-indicator">
+                    <span class="status-dot" id="status-dot"></span>
+                    <span class="status-text" id="status-text">后端状态检查中...</span>
+                </div>
+            </div>
+
+            <!-- 翻译类型选择 -->
+            <div class="translation-options">
+                <div class="option-group">
+                    <div class="option-label">选择翻译类型</div>
+                    <div class="radio-group">
+
+                        <div class="radio-item active" data-type="webpage-google">
+                            <input type="radio" id="webpage-google" name="translationType" value="webpage-google" checked>
+                            <label for="webpage-google">
+                                网页翻译
+                                <div class="description">输入网页链接即可获得翻译版网页</div>
+                            </label>
+                        </div>
+                        <!-- <div class="radio-item" data-type="webpage-gpt">
+                            <input type="radio" id="webpage-gpt" name="translationType" value="webpage-gpt">
+                            <label for="webpage-gpt">
+                                网页翻译 (测试版)
+                                <div class="description">如果稳定版无法正确翻译网页，请使用测试版</div>
+                            </label>
+                        </div> -->
+                        <div class="radio-item" data-type="poster">
+                            <input type="radio" id="poster" name="translationType" value="poster">
+                            <label for="poster">
+                                海报翻译
+                                <div class="description">将海报内容转换为对应的结构化表格</div>
+                            </label>
+                        </div>
+                        <div class="radio-item" data-type="baidu-image">
+                            <input type="radio" id="baidu-image" name="translationType" value="baidu-image">
+                            <label for="baidu-image">
+                                图片翻译
+                                <div class="description">上传图片以进行翻译，请尽量保证文字清晰</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-section">
+                <!-- 海报翻译输入 -->
+                <div id="poster-input" class="input-content hidden">
+                    <div class="input-group">
+                        <label class="sub-label">选择海报文件</label>
+                        <div class="file-upload-enhanced">
+                            <input type="file" id="poster-file" accept=".png,.jpg,.jpeg,.bmp,.gif,.tiff" style="display: none;">
+                            <div class="file-upload-area" onclick="document.getElementById('poster-file').click();">
+                                <div class="file-upload-icon">FILE</div>
+                                <div class="file-upload-text">
+                                    <div class="primary-text">点击选择海报文件</div>
+                                    <div class="secondary-text">支持 PNG, JPG, JPEG, BMP, GIF, TIFF 格式</div>
+                                    <div class="file-size-hint">建议文件大小小于10MB</div>
+                                </div>
+                                <div class="file-upload-btn">选择文件</div>
+                            </div>
+                            <div id="poster-file-preview" class="file-preview hidden">
+                                <div class="preview-header">
+                                    <span class="preview-title">已选择文件</span>
+                                    <button type="button" class="remove-file-btn" onclick="removePosterFile()">✕</button>
+                                </div>
+                                <div class="preview-content">
+                                    <div class="image-info-container">
+                                        <img id="poster-preview-img" class="preview-image" alt="海报预览">
+                                        <div class="file-info">
+                                            <div id="poster-file-name" class="file-name"></div>
+                                            <div id="poster-file-size" class="file-size"></div>
+                                            <div id="poster-file-type" class="file-type"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google网页翻译输入 -->
+                <div id="webpage-google-input" class="input-content">
+                    <div class="input-group">
+                        <label for="webpage-google-url" class="sub-label">输入网页链接</label>
+                        <input type="url" id="webpage-google-url" placeholder="请输入要翻译的网页链接">
+                    </div>
+                </div>
+
+                <!-- GPT网页翻译输入 -->
+                <div id="webpage-gpt-input" class="input-content hidden">
+                    <div class="input-group">
+                        <label for="webpage-gpt-url" class="sub-label">输入网页链接</label>
+                        <input type="url" id="webpage-gpt-url" placeholder="请输入要翻译的网页链接">
+                    </div>
+                </div>
+
+                <!-- Baidu图片翻译输入 -->
+                <div id="baidu-image-input" class="input-content hidden">
+                    <div style="display: flex; gap: 15px;">
+                        <div class="input-group" style="flex: 1;">
+                            <label for="baidu-from-lang">源语言</label>
+                            <select id="baidu-from-lang">
+                                <option value="zh">中文 (Chinese)</option>
+                                <option value="en">英语 (English)</option>
+                                <option value="jp">日语 (Japanese)</option>
+                                <option value="ko">韩语 (Korean)</option>
+                                <option value="es">西班牙语 (Spanish)</option>
+                                <option value="fr">法语 (French)</option>
+                                <option value="th">泰语 (Thai)</option>
+                                <option value="ar">阿拉伯语 (Arabic)</option>
+                                <option value="ru">俄语 (Russian)</option>
+                                <option value="pt">葡萄牙语 (Portuguese)</option>
+                                <option value="de">德语 (German)</option>
+                                <option value="it">意大利语 (Italian)</option>
+                                <option value="vi">越南语 (Vietnamese)</option>
+                                <option value="hi">印地语 (Hindi)</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="flex: 1;">
+                            <label for="baidu-to-lang">目标语言</label>
+                            <select id="baidu-to-lang">
+                                <option value="en">英语 (English)</option>
+                                <option value="zh">中文 (Chinese)</option>
+                                <option value="jp">日语 (Japanese)</option>
+                                <option value="ko">韩语 (Korean)</option>
+                                <option value="es">西班牙语 (Spanish)</option>
+                                <option value="fr">法语 (French)</option>
+                                <option value="th">泰语 (Thai)</option>
+                                <option value="ar">阿拉伯语 (Arabic)</option>
+                                <option value="ru">俄语 (Russian)</option>
+                                <option value="pt">葡萄牙语 (Portuguese)</option>
+                                <option value="de">德语 (German)</option>
+                                <option value="it">意大利语 (Italian)</option>
+                                <option value="vi">越南语 (Vietnamese)</option>
+                                <option value="hi">印地语 (Hindi)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="sub-label">选择图片文件</label>
+                        <div class="file-upload-enhanced">
+                            <input type="file" id="baidu-image-file" accept=".png,.jpg,.jpeg,.bmp,.gif,.tiff" style="display: none;">
+                            <div class="file-upload-area" onclick="document.getElementById('baidu-image-file').click();">
+                                <div class="file-upload-icon">IMAGE</div>
+                                <div class="file-upload-text">
+                                    <div class="primary-text">点击选择图片文件</div>
+                                    <div class="secondary-text">支持 PNG, JPG, JPEG, BMP, GIF, TIFF 格式</div>
+                                    <div class="file-size-hint">建议文件大小小于10MB</div>
+                                </div>
+                                <div class="file-upload-btn">选择文件</div>
+                            </div>
+                            <div id="baidu-image-file-preview" class="file-preview hidden">
+                                <div class="preview-header">
+                                    <span class="preview-title">已选择文件</span>
+                                    <button type="button" class="remove-file-btn" onclick="removeBaiduImageFile()">✕</button>
+                                </div>
+                                <div class="preview-content">
+                                    <div class="image-info-container">
+                                        <img id="baidu-image-preview-img" class="preview-image" alt="图片预览">
+                                        <div class="file-info">
+                                            <div id="baidu-image-file-name" class="file-name"></div>
+                                            <div id="baidu-image-file-size" class="file-size"></div>
+                                            <div id="baidu-image-file-type" class="file-type"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="process-btn" onclick="processTranslation()" id="process-btn">开始翻译</button>
+            </div>
+
+            <!-- 状态消息 -->
+            <div id="status-message" class="status-message"></div>
+
+
+        </div>
+
+        <!-- 右侧面板 -->
+        <div class="right-panel">
+            <!-- 上方：结果预览区域 -->
+            <div class="result-preview-section">
+                <div class="preview-header">
+                    <h2>翻译结果预览</h2>
+                </div>
+
+                <div id="result-preview" class="result-preview-content">
+                    <div class="preview-placeholder">
+                        <div class="placeholder-icon">···</div>
+                        <div class="placeholder-text">
+                            <h3>等待翻译结果</h3>
+                            <p>请选择翻译类型并提供内容以开始翻译</p>
+                        </div>
+                    </div>
+                    
+                        <div class="loading" id="loading">
+                            <div class="spinner"></div>
+                            <p id="loading-text">翻译处理中...</p>
+                        </div>
+                </div>
+            </div>
+
+            <!-- 下方：结果信息列表 -->
+            <div class="result-details-section">
+                <div class="details-header">
+                    <h3>处理详情</h3>
+                </div>
+                
+                <div id="result-details" class="result-details-content">
+                    <div class="details-placeholder">
+                        <p>翻译完成后将在此显示详细信息</p>
+                    </div>
+                </div>
+
+                <div class="download-section">
+                    <div class="download-buttons">
+                        <button class="download-btn" id="download-main-btn" onclick="downloadMain()">下载结果</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTranslationType = 'webpage-google';
+        let translationResult = null;
+        // let backendUrl = 'https://file-translation.zacchen.win';
+        //测试
+        let backendUrl = 'https://filetrans2.0.drziangchen.uk';
+        let logUpdateInterval = null;
+
+        // 屏幕分辨率检测和自适应布局
+        function detectScreenSize() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            const screenType = getScreenType(width);
+            
+            return {
+                width,
+                height,
+                dpr,
+                screenType,
+                isRetina: dpr > 1,
+                isLandscape: width > height,
+                aspectRatio: (width / height).toFixed(2)
+            };
+        }
+        
+        function getScreenType(width) {
+            if (width >= 1920) return 'ultra-wide';
+            if (width >= 1440) return 'large';
+            if (width >= 1024) return 'medium';
+            if (width >= 768) return 'tablet-landscape';
+            if (width >= 480) return 'tablet-portrait';
+            return 'mobile';
+        }
+        
+        function applyAdaptiveLayout() {
+            const screenInfo = detectScreenSize();
+            const body = document.body;
+            
+            // 移除所有之前的屏幕类型类
+            body.classList.remove('ultra-wide', 'large', 'medium', 'tablet-landscape', 'tablet-portrait', 'mobile');
+            body.classList.remove('retina', 'landscape', 'portrait');
+            
+            // 添加当前屏幕类型类
+            body.classList.add(screenInfo.screenType);
+            
+            if (screenInfo.isRetina) {
+                body.classList.add('retina');
+            }
+            
+            if (screenInfo.isLandscape) {
+                body.classList.add('landscape');
+            } else {
+                body.classList.add('portrait');
+            }
+            
+            // 设置CSS自定义属性
+            document.documentElement.style.setProperty('--screen-width', screenInfo.width + 'px');
+            document.documentElement.style.setProperty('--screen-height', screenInfo.height + 'px');
+            document.documentElement.style.setProperty('--device-pixel-ratio', screenInfo.dpr);
+            document.documentElement.style.setProperty('--aspect-ratio', screenInfo.aspectRatio);
+            
+            // 动态调整字体大小
+            adjustFontSizes(screenInfo);
+            
+            // 动态调整容器布局
+            adjustContainerLayout(screenInfo);
+            
+            console.log('📱 屏幕信息:', {
+                尺寸: `${screenInfo.width}x${screenInfo.height}`,
+                类型: screenInfo.screenType,
+                像素比: screenInfo.dpr,
+                方向: screenInfo.isLandscape ? '横屏' : '竖屏',
+                高分辨率: screenInfo.isRetina ? '是' : '否'
+            });
+        }
+        
+        function adjustFontSizes(screenInfo) {
+            const baseSize = calculateBaseFontSize(screenInfo);
+            document.documentElement.style.setProperty('--base-font-size', baseSize + 'px');
+            
+            // 根据屏幕尺寸调整根字体大小
+            if (screenInfo.width <= 479) {
+                document.documentElement.style.fontSize = '14px';
+            } else if (screenInfo.width <= 767) {
+                document.documentElement.style.fontSize = '15px';
+            } else if (screenInfo.width <= 1023) {
+                document.documentElement.style.fontSize = '16px';
+            } else if (screenInfo.width <= 1439) {
+                document.documentElement.style.fontSize = '17px';
+            } else {
+                document.documentElement.style.fontSize = '18px';
+            }
+        }
+        
+        function calculateBaseFontSize(screenInfo) {
+            const minSize = 14;
+            const maxSize = 20;
+            const minWidth = 320;
+            const maxWidth = 1920;
+            
+            const ratio = Math.min(Math.max((screenInfo.width - minWidth) / (maxWidth - minWidth), 0), 1);
+            return Math.round(minSize + (maxSize - minSize) * ratio);
+        }
+        
+        function adjustContainerLayout(screenInfo) {
+            const container = document.querySelector('.container');
+            const leftPanel = document.querySelector('.left-panel');
+            
+            if (!container || !leftPanel) return;
+            
+            // 超大屏幕优化
+            if (screenInfo.screenType === 'ultra-wide') {
+                container.style.maxWidth = '1800px';
+                if (screenInfo.width >= 2560) {
+                    leftPanel.style.flex = '0 0 600px';
+                }
+            }
+            
+            // 移动设备优化
+            if (screenInfo.screenType === 'mobile') {
+                // 优化移动端滚动性能
+                container.style.webkitOverflowScrolling = 'touch';
+                container.style.overflowY = 'auto';
+            }
+        }
+        
+        function optimizeForMobile() {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            
+            if (isMobile || isTouchDevice) {
+                document.body.classList.add('touch-device');
+                
+                // 优化触摸体验
+                const radioItems = document.querySelectorAll('.radio-item');
+                radioItems.forEach(item => {
+                    item.style.touchAction = 'manipulation';
+                });
+                
+                // 防止iOS双击缩放
+                const buttons = document.querySelectorAll('button');
+                buttons.forEach(button => {
+                    button.style.touchAction = 'manipulation';
+                });
+            }
+        }
+        
+        // 监听屏幕尺寸变化
+        function setupResizeListener() {
+            let resizeTimeout;
+            
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    applyAdaptiveLayout();
+                    
+                    // 重新优化图片布局
+                    const imageContainers = document.querySelectorAll('[id^="image-container-"]');
+                    imageContainers.forEach(container => {
+                        const containerId = container.id;
+                        setTimeout(() => optimizeImageLayout(containerId), 100);
+                    });
+                }, 150);
+            });
+            
+            // 监听设备方向变化
+            window.addEventListener('orientationchange', function() {
+                setTimeout(() => {
+                    applyAdaptiveLayout();
+                }, 300);
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            checkBackendStatus(); // 初始检查
+            
+            // 设置周期性后端状态检查（每10秒一次）
+            setInterval(checkBackendStatus, 10000);
+            
+            // 初始化自适应布局
+            applyAdaptiveLayout();
+            setupResizeListener();
+            optimizeForMobile();
+            
+            // 确保显示正确的默认输入区域
+            updateInputSection();
+            updateRadioItemStyles();
+            
+            // 检查PDF支持
+            const pdfSupported = checkPdfSupport();
+            console.log('浏览器PDF支持状态:', pdfSupported ? '支持' : '不支持');
+            
+            if (!pdfSupported) {
+                console.warn('⚠️ 您的浏览器可能不支持PDF预览，建议使用Chrome、Firefox或Edge浏览器');
+                addLogEntry('浏览器PDF支持受限，建议使用Chrome浏览器', 'warning');
+            } else {
+                addLogEntry('浏览器PDF支持正常', 'success');
+            }
+            
+            // 显示调试信息
+            console.log('🔧 调试工具已加载:');
+            console.log('  - debugPdfFiles() - 查看可用PDF文件');
+            console.log('  - testPdfPreview(url) - 测试PDF预览URL');
+            console.log('  - testCurrentPdf() - 测试当前翻译结果的PDF');
+            console.log('  - testPdfInfrastructure() - 测试PDF预览基础设施');
+            console.log('  - checkPdfSupport() - 检查PDF支持');
+            console.log('  - applyAdaptiveLayout() - 重新应用自适应布局');
+            console.log('  - detectScreenSize() - 检测当前屏幕信息');
+            console.log('💡 提示: 翻译完成后可使用控制台命令进行调试');
+            console.log('🧪 如果PDF预览有问题，请先运行 testPdfInfrastructure() 进行基础测试');
+            
+            const screenInfo = detectScreenSize();
+            addLogEntry(`移民材料翻译平台前端已加载 - 响应式版 v3.0 (${screenInfo.width}x${screenInfo.height})`, 'success');
+            addLogEntry(`当前屏幕类型: ${screenInfo.screenType} (${screenInfo.isLandscape ? '横屏' : '竖屏'})`, 'info');
+            addLogEntry('自适应布局已启用，支持多种屏幕尺寸', 'success');
+        });
+
+        // 处理海报文件选择
+        function handlePosterFileSelect(input) {
+            const file = input.files[0];
+            const preview = document.getElementById('poster-file-preview');
+            const uploadArea = document.querySelector('.file-upload-area');
+            
+            if (file) {
+                // 验证文件大小
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (file.size > maxSize) {
+                    alert(`文件大小超过限制（${(file.size/1024/1024).toFixed(2)}MB > 10MB）`);
+                    input.value = '';
+                    return;
+                }
+                
+                // 验证文件类型
+                const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/bmp', 'image/gif', 'image/tiff'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert(`不支持的文件类型: ${file.type}`);
+                    input.value = '';
+                    return;
+                }
+                
+                // 显示预览
+                preview.classList.remove('hidden');
+                uploadArea.style.display = 'none';
+                
+                // 更新文件信息
+                document.getElementById('poster-file-name').textContent = file.name;
+                document.getElementById('poster-file-size').textContent = `${(file.size/1024).toFixed(2)} KB`;
+                document.getElementById('poster-file-type').textContent = file.type;
+                
+                // 显示图像预览
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('poster-preview-img').src = e.target.result;
+                    // 为预览容器添加图片预览样式类
+                    const previewContent = preview.querySelector('.preview-content');
+                    if (previewContent) {
+                        previewContent.classList.add('image-preview');
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                // 隐藏预览
+                preview.classList.add('hidden');
+                uploadArea.style.display = 'block';
+            }
+        }
+
+        // 移除海报文件
+        function removePosterFile() {
+            const input = document.getElementById('poster-file');
+            const preview = document.getElementById('poster-file-preview');
+            const uploadArea = document.querySelector('.file-upload-area');
+            
+            input.value = '';
+            preview.classList.add('hidden');
+            uploadArea.style.display = 'block';
+            
+            // 移除图片预览样式类
+            const previewContent = preview.querySelector('.preview-content');
+            if (previewContent) {
+                previewContent.classList.remove('image-preview');
+            }
+        }
+
+        // 处理百度图片文件选择
+        function handleBaiduImageFileSelect(input) {
+            const file = input.files[0];
+            const preview = document.getElementById('baidu-image-file-preview');
+            const uploadArea = document.querySelector('#baidu-image-input .file-upload-area');
+            
+            if (file) {
+                // 验证文件大小
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (file.size > maxSize) {
+                    alert(`文件大小超过限制（${(file.size/1024/1024).toFixed(2)}MB > 10MB）`);
+                    input.value = '';
+                    return;
+                }
+                
+                // 验证文件类型
+                const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/bmp', 'image/gif', 'image/tiff'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert(`不支持的文件类型: ${file.type}`);
+                    input.value = '';
+                    return;
+                }
+                
+                // 显示预览
+                preview.classList.remove('hidden');
+                uploadArea.style.display = 'none';
+                
+                // 更新文件信息
+                document.getElementById('baidu-image-file-name').textContent = file.name;
+                document.getElementById('baidu-image-file-size').textContent = `${(file.size/1024).toFixed(2)} KB`;
+                document.getElementById('baidu-image-file-type').textContent = file.type;
+                
+                // 显示图像预览
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('baidu-image-preview-img').src = e.target.result;
+                    // 为预览容器添加图片预览样式类
+                    const previewContent = preview.querySelector('.preview-content');
+                    if (previewContent) {
+                        previewContent.classList.add('image-preview');
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                // 隐藏预览
+                preview.classList.add('hidden');
+                uploadArea.style.display = 'block';
+            }
+        }
+
+        // 移除百度图片文件
+        function removeBaiduImageFile() {
+            const input = document.getElementById('baidu-image-file');
+            const preview = document.getElementById('baidu-image-file-preview');
+            const uploadArea = document.querySelector('#baidu-image-input .file-upload-area');
+            
+            input.value = '';
+            preview.classList.add('hidden');
+            uploadArea.style.display = 'block';
+            
+            // 移除图片预览样式类
+            const previewContent = preview.querySelector('.preview-content');
+            if (previewContent) {
+                previewContent.classList.remove('image-preview');
+            }
+        }
+
+        function setupEventListeners() {
+            // 翻译类型选择
+            document.querySelectorAll('input[name="translationType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    currentTranslationType = this.value;
+                    updateInputSection();
+                    updateRadioItemStyles();
+                });
+            });
+
+            // 文件上传按钮
+            document.querySelectorAll('.file-upload input[type="file"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    updateFileUploadButton(this);
+                });
+            });
+
+            // 海报文件选择
+            const posterFileInput = document.getElementById('poster-file');
+            if (posterFileInput) {
+                posterFileInput.addEventListener('change', function() {
+                    handlePosterFileSelect(this);
+                });
+            }
+
+            // 百度图片文件选择
+            const baiduImageFileInput = document.getElementById('baidu-image-file');
+            if (baiduImageFileInput) {
+                baiduImageFileInput.addEventListener('change', function() {
+                    handleBaiduImageFileSelect(this);
+                });
+            }
+        }
+
+        async function checkBackendStatus() {
+            const statusEl = document.getElementById('backend-status');
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+            
+            try {
+                const response = await fetch(`${backendUrl}/api/test`);
+                if (response.ok) {
+                    const data = await response.json();
+                    statusEl.className = 'backend-status connected';
+                    statusDot.style.backgroundColor = '#10b981';
+                    statusText.textContent = '后端连接正常';
+                } else {
+                    throw new Error('连接失败');
+                }
+            } catch (error) {
+                statusEl.className = 'backend-status error';
+                statusDot.style.backgroundColor = '#ef4444';
+                statusText.textContent = '后端连接失败';
+            }
+        }
+
+        function updateRadioItemStyles() {
+            document.querySelectorAll('.radio-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`.radio-item[data-type="${currentTranslationType}"]`).classList.add('active');
+        }
+
+        function updateInputSection() {
+            // 快速隐藏所有输入区域
+            document.querySelectorAll('.input-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // 短暂延迟后显示对应的输入区域，创建平滑过渡
+            setTimeout(() => {
+                const targetElement = document.getElementById(`${currentTranslationType}-input`);
+                if (targetElement) {
+                    targetElement.classList.remove('hidden');
+                }
+            }, 100);
+            
+            // 重置预览区域
+            resetPreview();
+        }
+
+        function updateFileUploadButton(input) {
+            const button = input.nextElementSibling;
+            if (input.files.length > 0) {
+                button.textContent = `📁 已选择: ${input.files[0].name}`;
+                button.style.background = '#28a745';
+            } else {
+                button.textContent = '📁 选择文件';
+                button.style.background = '#667eea';
+            }
+        }
+
+        function showLoading(text = '翻译处理中...') {
+            document.getElementById('loading-text').textContent = text;
+            document.getElementById('loading').classList.add('show');
+            document.querySelectorAll('.download-btn').forEach(btn => btn.style.display = 'none');
+            document.getElementById('process-btn').disabled = true;
+            hideStatusMessage();
+            
+            // 隐藏占位符内容，避免与加载状态重叠
+            const placeholders = document.querySelectorAll('.preview-placeholder');
+            placeholders.forEach(placeholder => {
+                placeholder.style.display = 'none';
+            });
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('show');
+            document.getElementById('process-btn').disabled = false;
+            
+            // 如果没有翻译结果，重新显示占位符
+            if (!translationResult) {
+                const placeholders = document.querySelectorAll('.preview-placeholder');
+                placeholders.forEach(placeholder => {
+                    placeholder.style.display = 'block';
+                });
+            }
+        }
+
+        function showStatusMessage(message, type) {
+            const statusEl = document.getElementById('status-message');
+            statusEl.textContent = message;
+            statusEl.className = `status-message ${type}`;
+            statusEl.style.display = 'block';
+        }
+
+        function hideStatusMessage() {
+            document.getElementById('status-message').style.display = 'none';
+        }
+
+        function showLogContainer() {
+            const logContainer = document.getElementById('log-container');
+            if (logContainer) {
+                logContainer.classList.add('show');
+            }
+        }
+
+        function hideLogContainer() {
+            const logContainer = document.getElementById('log-container');
+            if (logContainer) {
+                logContainer.classList.remove('show');
+            }
+        }
+
+        function addLogEntry(message, type = 'info') {
+            const logContent = document.getElementById('log-content');
+            if (!logContent) return; // 如果日志容器不存在，直接返回
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            
+            // 简化的日志格式，移除emoji
+            const prefix = {
+                'info': '[INFO]',
+                'success': '[SUCCESS]',
+                'warning': '[WARNING]',
+                'error': '[ERROR]',
+                'debug': '[DEBUG]'
+            };
+            
+            logEntry.textContent = `[${timestamp}] ${prefix[type] || '[INFO]'} ${message}`;
+            logContent.appendChild(logEntry);
+            
+            // 自动滚动到底部
+            logContent.scrollTop = logContent.scrollHeight;
+        }
+
+        function clearLogs() {
+            const logContent = document.getElementById('log-content');
+            if (logContent) {
+                logContent.innerHTML = '';
+            }
+        }
+
+        function resetPreview() {
+            const resultPreview = document.getElementById('result-preview');
+            const resultDetails = document.getElementById('result-details');
+            
+            // 重置预览区域
+            resultPreview.innerHTML = `
+                <div class="preview-placeholder">
+                    <div class="placeholder-icon">···</div>
+                    <div class="placeholder-text">
+                        <h3>等待翻译结果</h3>
+                        <p>请选择翻译类型并提供内容以开始翻译</p>
+                    </div>
+                </div>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p id="loading-text">翻译处理中...</p>
+                </div>
+            `;
+            
+            // 重置详情区域
+            resultDetails.innerHTML = `
+                <div class="details-placeholder">
+                    <p>翻译完成后将在此显示详细信息</p>
+                </div>
+            `;
+            
+            document.querySelectorAll('.download-btn').forEach(btn => btn.style.display = 'none');
+            translationResult = null;
+            hideLogContainer();
+            clearLogs();
+        }
+
+        async function processTranslation() {
+            try {
+                showLoading();
+                clearLogs();
+                showLogContainer();
+                addLogEntry('开始翻译流程', 'info');
+                
+                let isValid = false;
+                let requestData = {};
+                let endpoint = '';
+                let method = 'POST';
+                let isFormData = false;
+
+                // 验证输入并收集数据
+                switch (currentTranslationType) {
+                    case 'poster':
+                        addLogEntry('验证海报翻译输入', 'debug');
+                        const posterFile = document.getElementById('poster-file').files[0];
+                        
+                        if (!posterFile) {
+                            throw new Error('请选择海报文件');
+                        }
+                        
+                        // 验证文件大小（限制10MB）
+                        const maxSize = 10 * 1024 * 1024; // 10MB
+                        if (posterFile.size > maxSize) {
+                            throw new Error(`文件大小超过限制（${(posterFile.size/1024/1024).toFixed(2)}MB > 10MB）`);
+                        }
+                        
+                        // 验证文件类型
+                        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/bmp', 'image/gif', 'image/tiff'];
+                        if (!allowedTypes.includes(posterFile.type)) {
+                            throw new Error(`不支持的文件类型: ${posterFile.type}`);
+                        }
+
+                        addLogEntry(`选择的文件: ${posterFile.name}`, 'info');
+                        addLogEntry(`文件大小: ${(posterFile.size/1024).toFixed(2)} KB`, 'info');
+                        addLogEntry(`文件类型: ${posterFile.type}`, 'info');
+                        addLogEntry('使用后端配置的API密钥', 'debug');
+                        addLogEntry('准备调用海报翻译API（增强版）', 'info');
+
+                        const posterFormData = new FormData();
+                        posterFormData.append('image', posterFile);
+                        
+                        requestData = posterFormData;
+                        endpoint = '/api/poster-translate';
+                        isFormData = true;
+                        isValid = true;
+                        showLoading('海报翻译中...');
+                        break;
+                    
+                    case 'webpage-gpt':
+                        addLogEntry('验证GPT网页翻译输入', 'debug');
+                        const gptUrl = document.getElementById('webpage-gpt-url').value.trim();
+                        
+                        if (!gptUrl) {
+                            throw new Error('请输入网页链接');
+                        }
+
+                        addLogEntry(`目标URL: ${gptUrl}`, 'info');
+                        addLogEntry('使用后端配置的API密钥', 'debug');
+                        addLogEntry('准备调用GPT翻译API（增强版）', 'info');
+
+                        requestData = {
+                            url: gptUrl
+                        };
+                        
+                        endpoint = '/api/webpage-gpt-translate';
+                        isValid = true;
+                        showLoading('网页翻译中...');
+                        break;
+                    
+                    case 'webpage-google':
+                        addLogEntry('验证Google网页翻译输入', 'debug');
+                        const googleUrl = document.getElementById('webpage-google-url').value.trim();
+                        
+                        if (!googleUrl) {
+                            throw new Error('请输入网页链接');
+                        }
+
+                        addLogEntry(`目标URL: ${googleUrl}`, 'info');
+                        addLogEntry('准备调用Google翻译API', 'info');
+
+                        requestData = {
+                            url: googleUrl
+                        };
+                        
+                        endpoint = '/api/webpage-google-translate';
+                        isValid = true;
+                        showLoading('网页翻译中...');
+                        break;
+
+                    case 'baidu-image':
+                        addLogEntry('验证百度图片翻译输入', 'debug');
+                        const baiduFromLang = document.getElementById('baidu-from-lang').value;
+                        const baiduToLang = document.getElementById('baidu-to-lang').value;
+                        const baiduImageFile = document.getElementById('baidu-image-file').files[0];
+
+                        if (!baiduImageFile) {
+                            throw new Error('请选择图片文件');
+                        }
+
+                        // 验证文件大小（限制10MB）
+                        const maxBaiduSize = 10 * 1024 * 1024; // 10MB
+                        if (baiduImageFile.size > maxBaiduSize) {
+                            throw new Error(`文件大小超过限制（${(baiduImageFile.size/1024/1024).toFixed(2)}MB > 10MB）`);
+                        }
+
+                        // 验证文件类型
+                        const allowedBaiduTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/bmp', 'image/gif', 'image/tiff'];
+                        if (!allowedBaiduTypes.includes(baiduImageFile.type)) {
+                            throw new Error(`不支持的文件类型: ${baiduImageFile.type}`);
+                        }
+
+                        addLogEntry(`选择的文件: ${baiduImageFile.name}`, 'info');
+                        addLogEntry(`文件大小: ${(baiduImageFile.size/1024).toFixed(2)} KB`, 'info');
+                        addLogEntry(`翻译方向: ${baiduFromLang} -> ${baiduToLang}`, 'info');
+                        addLogEntry('使用后端配置的API密钥', 'debug');
+                        addLogEntry('准备调用百度图片翻译API', 'info');
+
+                        const baiduFormData = new FormData();
+                        baiduFormData.append('image', baiduImageFile);
+                        baiduFormData.append('from_lang', baiduFromLang);
+                        baiduFormData.append('to_lang', baiduToLang);
+                        baiduFormData.append('save_image', 'true');
+                        
+                        requestData = baiduFormData;
+                        endpoint = '/api/image-translate';
+                        isFormData = true;
+                        isValid = true;
+                        showLoading('图片翻译中...');
+                        break;
+                }
+
+                if (!isValid) {
+                    throw new Error('请提供有效的输入内容');
+                }
+
+                // 调用后端API
+                addLogEntry('发送请求到后端服务', 'info');
+                const response = await callBackendAPI(endpoint, requestData, isFormData);
+                
+                if (response.success) {
+                    addLogEntry('后端处理成功', 'success');
+                    addLogEntry('正在显示翻译结果', 'info');
+                    displayResult(response);
+                    showStatusMessage('翻译完成！', 'success');
+                    addLogEntry('翻译流程完成', 'success');
+                } else {
+                    addLogEntry(`后端返回错误: ${response.error}`, 'error');
+                    throw new Error(response.error || '翻译失败');
+                }
+                
+            } catch (error) {
+                hideLoading();
+                addLogEntry(`处理失败: ${error.message}`, 'error');
+                showStatusMessage(error.message, 'error');
+                console.error('Translation error:', error);
+            }
+        }
+
+        async function callBackendAPI(endpoint, data, isFormData = false) {
+            const url = `${backendUrl}${endpoint}`;
+            
+            const options = {
+                method: 'POST',
+                body: isFormData ? data : JSON.stringify(data)
+            };
+
+            if (!isFormData) {
+                options.headers = {
+                    'Content-Type': 'application/json'
+                };
+            }
+
+            const response = await fetch(url, options);
+            return await response.json();
+        }
+
+        // function displayResult(result) {
+        //     hideLoading();
+
+        //     // 生成预览内容
+        //     const previewContent = generatePreviewContent(result);
+            
+        //     // 生成详情内容
+        //     const detailsContent = generateDetailsContent(result);
+            
+        //     // 更新预览区域
+        //     const resultPreview = document.getElementById('result-preview');
+        //     resultPreview.innerHTML = previewContent;
+            
+        //     // 更新详情区域
+        //     const resultDetails = document.getElementById('result-details');
+        //     resultDetails.innerHTML = detailsContent;
+
+        //     // 保存结果数据
+        //     translationResult = result;
+
+        //     // 显示相应的下载按钮
+        //     showDownloadButtons(result);
+            
+        //     // 如果有PDF预览，测试URL可访问性
+        //     if ((currentTranslationType === 'poster' && result.pdf_generated) ||
+        //         (currentTranslationType.startsWith('webpage') && result.download_url)) {
+        //         setTimeout(() => testPdfUrls(result), 1000);
+        //     }
+        // }
+
+        function displayResult(result) {
+        hideLoading();
+        translationResult = result; // 保存结果以供下载
+
+        const resultPreview = document.getElementById('result-preview');
+        const resultDetails = document.getElementById('result-details');
+        
+        let previewContent = '';
+        let detailsContent = '';
+
+        try {
+            // --- 根据不同的翻译类型生成预览和详情 ---
+            const filename = result.pdf_filename || result.translated_filename;
+            if (!filename) {
+                // 如果后端没有返回有效的文件名，则显示错误
+                if (currentTranslationType === 'baidu-image' && result.has_translated_image === false) {
+                     // 图片翻译只返回文本，是正常情况
+                } else {
+                    throw new Error(result.error || '后端未返回有效的文件名。');
+                }
+            }
+            
+            // --- 关键修正：对所有文件名进行URL编码 ---
+            const encodedFilename = encodeURIComponent(filename);
+            let previewUrlPath = '';
+
+            if (currentTranslationType === 'poster') {
+                previewUrlPath = `/preview/poster/${encodedFilename}`;
+            } else if (currentTranslationType === 'webpage-google') {
+                previewUrlPath = `/preview/translated/${encodedFilename}`;
+            } else if (currentTranslationType === 'webpage-gpt') {
+                const folder = result.folder_name;
+                previewUrlPath = `/preview/workflow/${folder}/${encodedFilename}`;
+            }
+
+            if (previewUrlPath) {
+                const fullPreviewUrl = `${backendUrl}${previewUrlPath}`;
+                previewContent = `<iframe src="${fullPreviewUrl}" class="preview-iframe" title="翻译结果PDF预览"></iframe>`;
+            } else if (currentTranslationType === 'baidu-image') {
+                // 对于图片翻译，我们仍然推荐使用Base64，但如果坚持URL方式，需要后端返回正确的URL
+                // 这里暂时保持原样，因为图片预览问题更复杂
+                 if (result.has_translated_image && result.download_url) {
+                    const originalImageUrl = result.original_image_url ? `${backendUrl}${result.original_image_url}` : '';
+                    const translatedImageUrl = result.download_url ? `${backendUrl}${result.download_url}` : '';
+                    previewContent = `
+                        <div class="preview-image-container horizontal">
+                            <div class="preview-image-item"><h4>原始图片</h4><img src="${originalImageUrl}" alt="原始图片" class="preview-image"></div>
+                            <div class="preview-image-item"><h4>翻译后图片</h4><img src="${translatedImageUrl}" alt="翻译后图片" class="preview-image"></div>
+                        </div>`;
+                }
+            }
+            
+            detailsContent = generateDetailsContent(result);
+            showDownloadButtons(result);
+            
+            // 更新UI
+            resultPreview.innerHTML = previewContent || '<div class="preview-placeholder"><h3>无可用预览</h3></div>';
+            resultDetails.innerHTML = detailsContent;
+            showStatusMessage('翻译完成！', 'success');
+
+        } catch (error) {
+            // 统一的错误处理
+            resultPreview.innerHTML = `<div class="preview-placeholder"><div class="placeholder-icon" style="color: #ef4444;">❌</div><div class="placeholder-text"><h3>处理失败</h3><p>${error.message}</p></div></div>`;
+            resultDetails.innerHTML = `<div class="details-placeholder"><p>详细信息不可用</p></div>`;
+            showStatusMessage(`处理失败: ${error.message}`, 'error');
+            console.error("Display result error:", error);
+        }
+    }
+
+
+        // 测试PDF URL的可访问性
+        async function testPdfUrls(result) {
+            try {
+                let testUrl = '';
+                
+                if (currentTranslationType === 'poster' && result.pdf_download_url) {
+                    const previewUrl = result.pdf_download_url.replace('/download/poster/', '/preview/poster/');
+                    testUrl = `${backendUrl}${previewUrl}`;
+                } else if (currentTranslationType.startsWith('webpage') && result.download_url) {
+                    let previewUrl;
+                    if (currentTranslationType === 'webpage-google') {
+                        previewUrl = result.download_url.replace('/download/translated/', '/preview/translated/');
+                    } else {
+                        previewUrl = result.download_url.replace('/download/workflow/', '/preview/workflow/');
+                    }
+                    testUrl = `${backendUrl}${previewUrl}`;
+                }
+                
+                if (testUrl) {
+                    console.log('测试PDF URL:', testUrl);
+                    
+                    const response = await fetch(testUrl, { method: 'HEAD' });
+                    
+                    if (response.ok) {
+                        console.log('✅ PDF URL测试成功:', response.status);
+                        addLogEntry(`PDF预览URL测试成功: ${response.status}`, 'success');
+                    } else {
+                        console.error('❌ PDF URL测试失败:', response.status, response.statusText);
+                        addLogEntry(`PDF预览URL测试失败: ${response.status} ${response.statusText}`, 'error');
+                    }
+                }
+            } catch (error) {
+                console.error('PDF URL测试异常:', error);
+                addLogEntry(`PDF预览URL测试异常: ${error.message}`, 'error');
+            }
+        }
+
+        function generatePreviewContent(result) {
+            switch (currentTranslationType) {
+                case 'poster':
+                    // 海报翻译 - 显示编译后的PDF结果
+                    if (result.pdf_generated && result.pdf_download_url) {
+                        // 将下载URL转换为预览URL
+                        const previewUrl = result.pdf_download_url.replace('/download/poster/', '/preview/poster/');
+                        const fullPreviewUrl = `${backendUrl}${previewUrl}`;
+                        
+                        console.log('🔍 海报PDF预览调试信息:');
+                        console.log('  - 原始下载URL:', result.pdf_download_url);
+                        console.log('  - 转换后预览URL:', previewUrl);
+                        console.log('  - 完整预览URL:', fullPreviewUrl);
+                        console.log('  - 后端URL:', backendUrl);
+                        
+                        // 验证URL格式
+                        if (!fullPreviewUrl.startsWith('http')) {
+                            console.error('❌ 预览URL格式错误:', fullPreviewUrl);
+                        }
+                        
+                        return `
+                            <div class="preview-pdf-container" style="padding: 0; background: #ffffff; position: relative;">
+                                <iframe src="${fullPreviewUrl}" 
+                                        class="preview-iframe"
+                                        title="海报翻译PDF预览"
+                                        onload="handlePdfIframeLoad(this)"
+                                        onerror="handlePdfIframeError(this)"
+                                        style="opacity: 0; transition: opacity 0.3s ease;">
+                                </iframe>
+                                <div class="pdf-fallback" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #64748b; z-index: 1;">
+                                    <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
+                                    <h3>PDF 预览加载中...</h3>
+                                    <p>如果无法显示预览，请点击下载按钮</p>
+                                    <p style="font-size: 0.8em; color: #94a3b8; margin-top: 10px;">正在加载: ${previewUrl}</p>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        return `
+                            <div class="preview-pdf-container">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 48px; margin-bottom: 15px; color: #ef4444;">❌</div>
+                                    <h3>PDF 生成失败</h3>
+                                    <p>LaTeX 代码已生成，但 PDF 编译失败</p>
+                                    ${result.pdf_message ? `<p style="margin-top: 10px; color: #ef4444; font-size: 0.9em;">${result.pdf_message}</p>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                case 'webpage-gpt':
+                case 'webpage-google':
+                    // 网页翻译 - 显示翻译后的PDF内容
+                    if (result.download_url) {
+                        // 根据翻译类型确定预览URL
+                        let previewUrl;
+                        if (currentTranslationType === 'webpage-google') {
+                            previewUrl = result.download_url.replace('/download/translated/', '/preview/translated/');
+                        } else {
+                            previewUrl = result.download_url.replace('/download/workflow/', '/preview/workflow/');
+                        }
+                        
+                        const fullPreviewUrl = `${backendUrl}${previewUrl}`;
+                        
+                        console.log('🔍 网页PDF预览调试信息:');
+                        console.log('  - 原始下载URL:', result.download_url);
+                        console.log('  - 转换后预览URL:', previewUrl);
+                        console.log('  - 完整预览URL:', fullPreviewUrl);
+                        console.log('  - 后端URL:', backendUrl);
+                        console.log('  - 当前翻译类型:', currentTranslationType);
+                        
+                        // 验证URL格式
+                        if (!fullPreviewUrl.startsWith('http')) {
+                            console.error('❌ 预览URL格式错误:', fullPreviewUrl);
+                        }
+                        
+                        return `
+                            <div class="preview-pdf-container" style="padding: 0; background: #ffffff; position: relative;">
+                                <iframe src="${fullPreviewUrl}" 
+                                        class="preview-iframe"
+                                        title="网页翻译PDF预览"
+                                        onload="handlePdfIframeLoad(this)"
+                                        onerror="handlePdfIframeError(this)"
+                                        style="opacity: 0; transition: opacity 0.3s ease;">
+                                </iframe>
+                                <div class="pdf-fallback" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #64748b; z-index: 1;">
+                                    <div style="font-size: 48px; margin-bottom: 15px;">🌐</div>
+                                    <h3>PDF 预览加载中...</h3>
+                                    <p>文件大小: ${(result.file_size / 1024).toFixed(2)} KB</p>
+                                    <p style="font-size: 0.8em; margin-top: 5px;">如果无法显示预览，请点击下载按钮</p>
+                                    <p style="font-size: 0.7em; color: #94a3b8; margin-top: 5px;">正在加载: ${previewUrl}</p>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        return `
+                            <div class="preview-pdf-container">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 48px; margin-bottom: 15px; color: #ef4444;">❌</div>
+                                    <h3>PDF 生成失败</h3>
+                                    <p>网页翻译过程中出现问题</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                case 'baidu-image':
+                    // 图片翻译 - 显示原图与翻译后图片的对比预览
+                    if (result.has_translated_image && result.download_url) {
+                        const containerId = `image-container-${Date.now()}`;
+                        return `
+                            <div id="${containerId}" class="preview-image-container horizontal">
+                                <div class="preview-image-item">
+                                    <h4>原始图片</h4>
+                                    <img id="${containerId}-original" 
+                                         src="${result.original_image_url ? backendUrl + result.original_image_url : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iNzUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzlDQTNBRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+5Y6f5aeL5Zu+54mH</dGV4dD4KPHN2Zz4K'}" 
+                                         alt="原始图片" class="preview-image" 
+                                         onload="optimizeImageLayout('${containerId}')"
+                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iNzUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzlDQTNBRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+5Zu+54mH5LiN5Y+v55So</dGV4dD4KPHN2Zz4K'">
+                                </div>
+                                <div class="preview-image-item">
+                                    <h4>翻译后图片</h4>
+                                    <img id="${containerId}-translated" 
+                                         src="${backendUrl}${result.download_url}" 
+                                         alt="翻译后图片" class="preview-image"
+                                         onload="optimizeImageLayout('${containerId}')"
+                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRUZGNkZGIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNzUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzEwQjk4MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+57+76K+R5ZCO5Zu+54mH</dGV4dD4KPHN2Zz4K'">
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        return `
+                            <div class="preview-pdf-container">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 48px; margin-bottom: 15px;">🖼️</div>
+                                    <h3>图片翻译完成</h3>
+                                    <p>检测到的文本已成功翻译</p>
+                                    ${result.text_info && result.text_info.summary_dst ? 
+                                        `<div style="margin-top: 15px; padding: 15px; background: rgba(59, 130, 246, 0.1); border-radius: 8px; border-left: 4px solid #3b82f6;">
+                                            <h4 style="color: #3b82f6; margin-bottom: 8px; font-size: 0.9em;">翻译结果:</h4>
+                                            <p style="color: #f1f5f9; line-height: 1.5; margin: 0;">${result.text_info.summary_dst}</p>
+                                        </div>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                default:
+                    return `
+                        <div class="preview-placeholder">
+                            <div class="placeholder-icon">✅</div>
+                            <div class="placeholder-text">
+                                <h3>翻译完成</h3>
+                                <p>请查看下方详情并下载结果</p>
+                            </div>
+                        </div>
+                    `;
+            }
+        }
+
+        function generateDetailsContent(result) {
+            switch (currentTranslationType) {
+                case 'poster':
+                    return `
+                        <div class="result-content">
+                            <div class="result-item">
+                                <h4>海报翻译结果</h4>
+                                <p><strong>LaTeX生成:</strong> <span class="${result.latex_generated ? 'success' : 'error'}">${result.latex_generated ? '成功' : '失败'}</span></p>
+                                <p><strong>PDF生成:</strong> <span class="${result.pdf_generated ? 'success' : 'error'}">${result.pdf_generated ? '成功' : '失败'}</span></p>
+                                ${result.pdf_message ? `<p><strong>消息:</strong> ${result.pdf_message}</p>` : ''}
+                                <p><strong>LaTeX文件:</strong> ${result.tex_filename}</p>
+                                ${result.pdf_filename ? `<p><strong>PDF文件:</strong> ${result.pdf_filename}</p>` : ''}
+                                <p><strong>代码长度:</strong> ${result.latex_code_length} 字符</p>
+                            </div>
+                        </div>
+                    `;
+
+                case 'webpage-gpt':
+                    return `
+                        <div class="result-content">
+                            <div class="result-item">
+                                <h4>GPT网页翻译结果</h4>
+                                <p><strong>原始链接:</strong> <a href="${result.original_url}" target="_blank" style="color: #3b82f6;">${result.original_url}</a></p>
+                                <p><strong>状态:</strong> <span class="success">翻译成功</span></p>
+                                <p><strong>翻译PDF:</strong> ${result.pdf_filename}</p>
+                                <p><strong>文件大小:</strong> ${(result.file_size / 1024).toFixed(2)} KB</p>
+                                <p><strong>增强功能:</strong> 
+                                    <span style="color: #10b981;">90% 缩放</span> | 
+                                    <span style="color: #10b981;">自动重试</span> | 
+                                    <span style="color: #10b981;">详细日志</span>
+                                </p>
+                            </div>
+                        </div>
+                    `;
+
+                case 'webpage-google':
+                    return `
+                        <div class="result-content">
+                            <div class="result-item">
+                                <h4>稳定版网页翻译结果</h4>
+                                <p><strong>原始链接:</strong> <a href="${result.original_url}" target="_blank" style="color: #3b82f6;">${result.original_url}</a></p>
+                                <p><strong>状态:</strong> <span class="success">翻译成功</span></p>
+                                <p><strong>翻译PDF:</strong> ${result.pdf_filename}</p>
+                                <p><strong>文件大小:</strong> ${(result.file_size / 1024).toFixed(2)} KB</p>
+                            </div>
+                        </div>
+                    `;
+
+                case 'baidu-image':
+                    return `
+                        <div class="result-content">
+                            <div class="result-item">
+                                <h4>图片翻译结果</h4>
+                                <p><strong>翻译方向:</strong> ${result.translation_direction}</p>
+                                <p><strong>状态:</strong> <span class="success">翻译成功</span></p>
+                                ${result.has_translated_image ? `<p><strong>翻译图片:</strong> ${result.translated_filename}</p>` : ''}
+                                ${result.file_size ? `<p><strong>文件大小:</strong> ${(result.file_size / 1024).toFixed(2)} KB</p>` : ''}
+                                ${result.text_info && result.text_info.summary_src ? `<p><strong>检测到的文本:</strong> ${result.text_info.summary_src}</p>` : ''}
+                                ${result.text_info && result.text_info.summary_dst ? `<p><strong>翻译文本:</strong> ${result.text_info.summary_dst}</p>` : ''}
+                                ${result.text_info && result.text_info.detected_texts && result.text_info.detected_texts.length > 0 ? 
+                                    `<p><strong>文本块数量:</strong> ${result.text_info.detected_texts.length} 个</p>` : ''}
+                            </div>
+                        </div>
+                    `;
+
+                default:
+                    return `
+                        <div class="details-placeholder">
+                            <p>处理完成，详细信息不可用</p>
+                        </div>
+                    `;
+            }
+        }
+
+        function showDownloadButtons(result) {
+            // 隐藏所有下载按钮
+            document.querySelectorAll('.download-btn').forEach(btn => btn.style.display = 'none');
+
+
+
+            switch (currentTranslationType) {
+                case 'poster':
+                    if (result.pdf_generated && result.pdf_download_url) {
+                        document.getElementById('download-main-btn').textContent = '下载翻译PDF';
+                        document.getElementById('download-main-btn').style.display = 'block';
+                    }
+                    break;
+
+                case 'webpage-gpt':
+                case 'webpage-google':
+                    if (result.download_url) {
+                        document.getElementById('download-main-btn').textContent = '下载翻译PDF';
+                        document.getElementById('download-main-btn').style.display = 'block';
+                    }
+                    break;
+
+                case 'baidu-image':
+                    if (result.has_translated_image && result.download_url) {
+                        document.getElementById('download-main-btn').textContent = '下载翻译图片';
+                        document.getElementById('download-main-btn').style.display = 'block';
+                    }
+                    break;
+            }
+
+
+        }
+
+        function downloadMain() {
+            if (!translationResult) return;
+            
+            let downloadUrl = '';
+            let filename = '';
+            let fileType = '';
+            
+            switch (currentTranslationType) {
+                case 'poster':
+                    downloadUrl = translationResult.pdf_download_url;
+                    filename = translationResult.pdf_filename;
+                    fileType = 'PDF文件';
+                    break;
+                case 'webpage-gpt':
+                case 'webpage-google':
+                    downloadUrl = translationResult.download_url;
+                    filename = translationResult.pdf_filename;
+                    fileType = 'PDF文件';
+                    break;
+                case 'baidu-image':
+                    downloadUrl = translationResult.download_url;
+                    filename = translationResult.translated_filename;
+                    fileType = '翻译图片';
+                    break;
+            }
+            
+            if (downloadUrl) {
+                addLogEntry(`开始下载${fileType}: ${filename}`, 'info');
+                window.open(`${backendUrl}${downloadUrl}`, '_blank');
+                showStatusMessage('文件下载已开始', 'success');
+            }
+        }
+
+        // PDF iframe处理函数
+        function handlePdfIframeLoad(iframe) {
+            console.log('🔄 PDF iframe 加载事件触发');
+            console.log('  - 当前src:', iframe.src);
+            console.log('  - iframe状态:', iframe.readyState);
+            
+            // 检查iframe是否指向了错误的URL
+            if (iframe.src === `${backendUrl}/` || iframe.src === backendUrl || iframe.src === 'about:blank') {
+                console.error('❌ iframe被重定向到错误的URL:', iframe.src);
+                handlePdfIframeError(iframe);
+                return;
+            }
+            
+            // 检查是否是PDF预览URL
+            if (!iframe.src.includes('/preview/')) {
+                console.error('❌ iframe URL不是预览URL:', iframe.src);
+                handlePdfIframeError(iframe);
+                return;
+            }
+            
+            // 延迟一点时间再显示，确保PDF真正加载完成
+            setTimeout(() => {
+                iframe.style.opacity = '1';
+                
+                // 隐藏加载提示
+                const fallback = iframe.parentElement.querySelector('.pdf-fallback');
+                if (fallback) {
+                    fallback.style.display = 'none';
+                }
+                
+                console.log('✅ PDF预览显示成功');
+            }, 500);
+        }
+
+        function handlePdfIframeError(iframe) {
+            console.error('PDF iframe 加载失败, src:', iframe.src);
+            iframe.style.opacity = '0';
+            
+            // 尝试备用预览方案
+            if (tryAlternativePdfPreview(iframe)) {
+                console.log('尝试使用备用PDF预览方案');
+                return;
+            }
+            
+            // 显示错误提示
+            const fallback = iframe.parentElement.querySelector('.pdf-fallback');
+            if (fallback) {
+                fallback.style.display = 'block';
+                fallback.innerHTML = `
+                    <div style="font-size: 48px; margin-bottom: 15px; color: #ef4444;">⚠️</div>
+                    <h3>PDF 预览不可用</h3>
+                    <p>可能的原因：</p>
+                    <ul style="text-align: left; font-size: 0.9em; margin: 10px 0;">
+                        <li>浏览器不支持PDF预览</li>
+                        <li>PDF文件损坏或不存在</li>
+                        <li>网络连接问题</li>
+                    </ul>
+                    <p style="font-size: 0.9em; margin-top: 15px; color: #3b82f6;">💡 建议点击下方下载按钮获取PDF文件</p>
+                    <button onclick="window.open('${iframe.src}', '_blank')" style="margin-top: 10px; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        在新标签页中打开PDF
+                    </button>
+                    <button onclick="tryReloadPdfIframe('${iframe.src}')" style="margin-left: 10px; margin-top: 10px; padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        重新加载预览
+                    </button>
+                    <button onclick="testPdfInfrastructure()" style="margin-left: 10px; margin-top: 10px; padding: 8px 16px; background: #8b5cf6; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        测试预览功能
+                    </button>
+                `;
+            }
+        }
+
+        // 尝试备用PDF预览方案
+        function tryAlternativePdfPreview(iframe) {
+            try {
+                const container = iframe.parentElement;
+                const pdfUrl = iframe.src;
+                
+                // 创建object元素作为备用
+                const objectElement = document.createElement('object');
+                objectElement.data = pdfUrl;
+                objectElement.type = 'application/pdf';
+                objectElement.style.width = '100%';
+                objectElement.style.height = '100%';
+                objectElement.style.border = 'none';
+                
+                // 添加失败回调
+                objectElement.onerror = function() {
+                    console.error('备用PDF预览方案也失败了');
+                    return false;
+                };
+                
+                // 替换iframe
+                container.removeChild(iframe);
+                container.appendChild(objectElement);
+                
+                console.log('已切换到object元素预览PDF');
+                return true;
+                
+            } catch (error) {
+                console.error('备用PDF预览方案失败:', error);
+                return false;
+            }
+        }
+
+        // 检测iframe是否真正加载了PDF内容
+        function checkIframeContent(iframe) {
+            try {
+                // 检查iframe是否成功加载
+                if (iframe.contentWindow && iframe.contentWindow.location.href === 'about:blank') {
+                    console.warn('iframe内容为空白页面');
+                    handlePdfIframeError(iframe);
+                    return false;
+                }
+                
+                // 检查响应状态
+                fetch(iframe.src)
+                    .then(response => {
+                        if (!response.ok) {
+                            console.error('PDF文件请求失败:', response.status, response.statusText);
+                            handlePdfIframeError(iframe);
+                        } else {
+                            console.log('PDF文件请求成功:', response.status);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('PDF文件检查失败:', error);
+                        handlePdfIframeError(iframe);
+                    });
+                
+                return true;
+            } catch (e) {
+                console.error('检查iframe内容时出错:', e);
+                return false;
+            }
+        }
+
+        // 检查浏览器PDF支持
+        function checkPdfSupport() {
+            // 检查浏览器是否支持PDF嵌入
+            const pdfPluginSupported = navigator.mimeTypes && navigator.mimeTypes['application/pdf'];
+            const chromeWithPdfViewer = navigator.userAgent.indexOf('Chrome') > -1;
+            const firefoxWithPdfViewer = navigator.userAgent.indexOf('Firefox') > -1;
+            
+            return pdfPluginSupported || chromeWithPdfViewer || firefoxWithPdfViewer;
+        }
+
+        // 调试功能：获取可用PDF文件列表
+        async function debugPdfFiles() {
+            try {
+                const response = await fetch(`${backendUrl}/api/debug/pdf-files`);
+                const result = await response.json();
+                
+                console.log('📁 可用PDF文件:', result);
+                
+                if (result.success) {
+                    let debugInfo = '📁 可用PDF文件列表:\n';
+                    
+                    if (result.files.poster && result.files.poster.length > 0) {
+                        debugInfo += `\n🎨 海报文件 (${result.files.poster.length}个):\n`;
+                        result.files.poster.forEach(file => {
+                            debugInfo += `  - ${file}\n`;
+                            debugInfo += `    预览: ${backendUrl}/preview/poster/${file}\n`;
+                        });
+                    }
+                    
+                    if (result.files.translated && result.files.translated.length > 0) {
+                        debugInfo += `\n🌐 Google翻译文件 (${result.files.translated.length}个):\n`;
+                        result.files.translated.forEach(file => {
+                            debugInfo += `  - ${file}\n`;
+                            debugInfo += `    预览: ${backendUrl}/preview/translated/${file}\n`;
+                        });
+                    }
+                    
+                    if (result.files.workflow && Object.keys(result.files.workflow).length > 0) {
+                        debugInfo += `\n🔄 工作流程文件:\n`;
+                        Object.keys(result.files.workflow).forEach(folder => {
+                            debugInfo += `  📂 ${folder}:\n`;
+                            result.files.workflow[folder].forEach(file => {
+                                debugInfo += `    - ${file}\n`;
+                                debugInfo += `      预览: ${backendUrl}/preview/workflow/${folder}/${file}\n`;
+                            });
+                        });
+                    }
+                    
+                    console.log(debugInfo);
+                    addLogEntry('PDF文件列表已在控制台显示', 'info');
+                } else {
+                    console.error('获取PDF文件列表失败:', result.error);
+                    addLogEntry(`获取PDF文件列表失败: ${result.error}`, 'error');
+                }
+                
+            } catch (error) {
+                console.error('调试功能异常:', error);
+                addLogEntry(`调试功能异常: ${error.message}`, 'error');
+            }
+        }
+
+        // 全局暴露调试函数（开发时使用）
+        window.debugPdfFiles = debugPdfFiles;
+        window.testPdfPreview = function(url) {
+            window.open(url, '_blank');
+        };
+        window.detectScreenSize = detectScreenSize;
+        window.applyAdaptiveLayout = applyAdaptiveLayout;
+        window.testCurrentPdf = function() {
+            if (!translationResult) {
+                console.log('❌ 当前没有翻译结果');
+                return;
+            }
+            
+            let previewUrl = '';
+            
+            if (currentTranslationType === 'poster' && translationResult.pdf_download_url) {
+                previewUrl = translationResult.pdf_download_url.replace('/download/poster/', '/preview/poster/');
+            } else if (currentTranslationType.startsWith('webpage') && translationResult.download_url) {
+                if (currentTranslationType === 'webpage-google') {
+                    previewUrl = translationResult.download_url.replace('/download/translated/', '/preview/translated/');
+                } else {
+                    previewUrl = translationResult.download_url.replace('/download/workflow/', '/preview/workflow/');
+                }
+            }
+            
+            if (previewUrl) {
+                const fullUrl = `${backendUrl}${previewUrl}`;
+                console.log('🔍 测试当前PDF预览URL:', fullUrl);
+                window.open(fullUrl, '_blank');
+            } else {
+                console.log('❌ 当前翻译结果没有PDF文件');
+            }
+        };
+        
+        // 重新加载PDF iframe
+        window.tryReloadPdfIframe = function(pdfUrl) {
+            console.log('🔄 尝试重新加载PDF预览:', pdfUrl);
+            
+            // 查找当前的PDF容器
+            const pdfContainers = document.querySelectorAll('.preview-pdf-container');
+            
+            pdfContainers.forEach(container => {
+                const iframe = container.querySelector('iframe');
+                if (iframe && (iframe.src === pdfUrl || iframe.src.includes('/preview/'))) {
+                    console.log('找到匹配的iframe，重新加载...');
+                    
+                    // 重置iframe
+                    iframe.style.opacity = '0';
+                    
+                    // 显示加载状态
+                    const fallback = container.querySelector('.pdf-fallback');
+                    if (fallback) {
+                        fallback.style.display = 'block';
+                        fallback.innerHTML = `
+                            <div style="font-size: 48px; margin-bottom: 15px;">🔄</div>
+                            <h3>重新加载PDF预览...</h3>
+                            <p>正在尝试重新加载预览内容</p>
+                        `;
+                    }
+                    
+                    // 延迟重新设置src
+                    setTimeout(() => {
+                        iframe.src = pdfUrl;
+                        console.log('iframe src已重新设置为:', pdfUrl);
+                    }, 1000);
+                }
+            });
+        };
+
+        // 测试PDF预览功能基础设施
+        window.testPdfInfrastructure = function() {
+            console.log('🧪 开始测试PDF预览基础设施...');
+            
+            // 测试基本的iframe功能
+            const testUrl = `${backendUrl}/api/test/pdf-preview`;
+            console.log('测试URL:', testUrl);
+            
+            // 创建测试iframe
+            const testContainer = document.createElement('div');
+            testContainer.style.cssText = `
+                position: fixed; top: 50px; right: 50px; width: 400px; height: 300px;
+                background: white; border: 2px solid #3b82f6; border-radius: 8px;
+                z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            `;
+            
+            testContainer.innerHTML = `
+                <div style="padding: 10px; background: #3b82f6; color: white; font-weight: bold;">
+                    PDF预览功能测试
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="float: right; background: none; border: none; color: white; cursor: pointer;">✕</button>
+                </div>
+                <iframe src="${testUrl}" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+            `;
+            
+            document.body.appendChild(testContainer);
+            
+            // 5秒后自动关闭
+            setTimeout(() => {
+                if (testContainer.parentElement) {
+                    testContainer.remove();
+                    console.log('✅ PDF预览功能测试完成');
+                }
+            }, 5000);
+        };
+
+        // 图片布局优化函数
+        function optimizeImageLayout(containerId) {
+            try {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                const originalImg = document.getElementById(`${containerId}-original`);
+                const translatedImg = document.getElementById(`${containerId}-translated`);
+                
+                // 等待两张图片都加载完成
+                if (!originalImg || !translatedImg || !originalImg.complete || !translatedImg.complete) {
+                    // 如果有图片还没加载完，稍后再试
+                    setTimeout(() => optimizeImageLayout(containerId), 100);
+                    return;
+                }
+                
+                // 获取容器尺寸
+                const containerRect = container.getBoundingClientRect();
+                const containerWidth = containerRect.width - 30; // 减去padding
+                const containerHeight = containerRect.height - 30;
+                
+                // 获取图片原始尺寸
+                const img1Width = originalImg.naturalWidth || originalImg.width;
+                const img1Height = originalImg.naturalHeight || originalImg.height;
+                const img2Width = translatedImg.naturalWidth || translatedImg.width;
+                const img2Height = translatedImg.naturalHeight || translatedImg.height;
+                
+                console.log(`容器尺寸: ${containerWidth} x ${containerHeight}`);
+                console.log(`原图尺寸: ${img1Width} x ${img1Height}`);
+                console.log(`翻译图尺寸: ${img2Width} x ${img2Height}`);
+                
+                if (img1Width === 0 || img1Height === 0 || img2Width === 0 || img2Height === 0) {
+                    console.log('图片尺寸无效，使用默认布局');
+                    return;
+                }
+                
+                // 计算图片的长宽比
+                const img1Ratio = img1Width / img1Height;
+                const img2Ratio = img2Width / img2Height;
+                const containerRatio = containerWidth / containerHeight;
+                
+                // 计算两种布局方案的空间利用率
+                let horizontalUtilization = 0;
+                let verticalUtilization = 0;
+                
+                // 水平排列时的计算
+                const horizontalAvailableWidth = containerWidth / 2 - 7.5; // 减去gap的一半
+                const horizontalImg1Scale = Math.min(
+                    horizontalAvailableWidth / img1Width,
+                    containerHeight / img1Height
+                );
+                const horizontalImg2Scale = Math.min(
+                    horizontalAvailableWidth / img2Width,
+                    containerHeight / img2Height
+                );
+                horizontalUtilization = (
+                    (img1Width * horizontalImg1Scale) + (img2Width * horizontalImg2Scale) + 15
+                ) / containerWidth;
+                
+                // 垂直排列时的计算
+                const verticalAvailableHeight = containerHeight / 2 - 30; // 减去标题和gap
+                const verticalImg1Scale = Math.min(
+                    containerWidth / img1Width,
+                    verticalAvailableHeight / img1Height
+                );
+                const verticalImg2Scale = Math.min(
+                    containerWidth / img2Width,
+                    verticalAvailableHeight / img2Height
+                );
+                verticalUtilization = Math.max(
+                    (img1Height * verticalImg1Scale + 30) / containerHeight,
+                    (img2Height * verticalImg2Scale + 30) / containerHeight
+                );
+                
+                console.log(`水平布局利用率: ${horizontalUtilization.toFixed(3)}`);
+                console.log(`垂直布局利用率: ${verticalUtilization.toFixed(3)}`);
+                
+                // 选择空间利用率更高的布局
+                const useHorizontal = horizontalUtilization >= verticalUtilization;
+                
+                // 应用布局
+                container.className = `preview-image-container ${useHorizontal ? 'horizontal' : 'vertical'}`;
+                
+                console.log(`选择${useHorizontal ? '水平' : '垂直'}布局`);
+                
+                // 强制重新布局
+                setTimeout(() => {
+                    container.style.display = 'none';
+                    container.offsetHeight; // 触发重排
+                    container.style.display = 'flex';
+                }, 10);
+                
+            } catch (error) {
+                console.error('布局优化失败:', error);
+            }
+        }
+
+        // 添加错误处理
+        window.addEventListener('error', function(e) {
+            hideLoading();
+            addLogEntry(`应用程序错误: ${e.error?.message || e.message}`, 'error');
+            showStatusMessage('发生了一个错误，请检查控制台', 'error');
+            console.error('Application error:', e.error);
+        });
+    </script>
+</body>
+</html>

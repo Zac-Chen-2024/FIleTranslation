@@ -249,7 +249,7 @@ export const exportAPI = {
 export const utilsAPI = {
   // 测试后端连接
   testConnection: async () => {
-    return await api.get('/api/test');
+    return await api.get('/health');
   },
 
   // 获取翻译进度

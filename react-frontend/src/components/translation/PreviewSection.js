@@ -325,11 +325,7 @@ const ComparisonView = ({ material, onSelectResult }) => {
               </button>
             </div>
           ) : material.latexTranslationResult ? (
-            <div className={styles.translationSuccess}>
-              <div className={styles.successIcon}>✅</div>
-              <p>LaTeX翻译完成</p>
-              {/* 这里可以显示LaTeX内容预览 */}
-            </div>
+            <LatexPdfPreview material={material} />
           ) : (
             <div className={styles.previewPlaceholder}>
               <div className={styles.placeholderIcon}>📄</div>
@@ -373,19 +369,15 @@ const ComparisonView = ({ material, onSelectResult }) => {
                   />
                 </div>
               )}
-              <div className={styles.translationSuccess}>
-                <div className={styles.successIcon}>✅</div>
-                <p>API翻译完成</p>
-                {!material.translatedImagePath && (
-                  <div className={styles.debugInfo}>
-                    <p>调试信息：</p>
-                    <p>状态: {material.status}</p>
-                    <p>图片路径: {material.translatedImagePath || '无'}</p>
-                    <p>翻译错误: {material.translationError || '无'}</p>
-                    <p>材料ID: {material.id}</p>
-                  </div>
-                )}
-              </div>
+              {!material.translatedImagePath && (
+                <div className={styles.debugInfo}>
+                  <p>调试信息：</p>
+                  <p>状态: {material.status}</p>
+                  <p>图片路径: {material.translatedImagePath || '无'}</p>
+                  <p>翻译错误: {material.translationError || '无'}</p>
+                  <p>材料ID: {material.id}</p>
+                </div>
+              )}
             </div>
           ) : material.status === '翻译失败' ? (
             <div className={styles.errorContent}>
@@ -427,6 +419,137 @@ const SinglePreview = ({ material }) => {
         <div className="loading-spinner"></div>
         <h4>网页翻译预览</h4>
         <p>正在处理网页内容...</p>
+      </div>
+    </div>
+  );
+};
+
+// LaTeX PDF预览组件
+const LatexPdfPreview = ({ material }) => {
+  const [pdfLoadError, setPdfLoadError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 解析LaTeX翻译结果
+  const latexResult = React.useMemo(() => {
+    if (!material.latexTranslationResult) return null;
+    
+    try {
+      return JSON.parse(material.latexTranslationResult);
+    } catch (error) {
+      console.error('解析LaTeX翻译结果失败:', error);
+      return null;
+    }
+  }, [material.latexTranslationResult]);
+
+  // 构建PDF预览URL
+  const pdfPreviewUrl = React.useMemo(() => {
+    if (!latexResult?.pdf_file) return null;
+    
+    // 从PDF文件路径中提取文件名
+    const pdfFileName = latexResult.pdf_file.split('/').pop();
+    if (!pdfFileName) return null;
+    
+    // 构建预览URL
+    const encodedFileName = encodeURIComponent(pdfFileName);
+    return `http://localhost:5000/preview/poster/${encodedFileName}`;
+  }, [latexResult]);
+
+  const handlePdfLoad = () => {
+    setIsLoading(false);
+    setPdfLoadError(false);
+    console.log('LaTeX PDF预览加载成功');
+  };
+
+  const handlePdfError = () => {
+    setIsLoading(false);
+    setPdfLoadError(true);
+    console.error('LaTeX PDF预览加载失败');
+  };
+
+  const handleRetryLoad = () => {
+    setIsLoading(true);
+    setPdfLoadError(false);
+    // 强制重新加载iframe
+    const iframe = document.getElementById(`latex-pdf-iframe-${material.id}`);
+    if (iframe) {
+      iframe.src = iframe.src;
+    }
+  };
+
+  const handleOpenInNewTab = () => {
+    if (pdfPreviewUrl) {
+      window.open(pdfPreviewUrl, '_blank');
+    }
+  };
+
+  if (!latexResult) {
+    return (
+      <div className={styles.pdfErrorContainer}>
+        <div className={styles.errorIcon}>⚠️</div>
+        <p>LaTeX翻译结果解析失败</p>
+      </div>
+    );
+  }
+
+  if (!pdfPreviewUrl) {
+    return (
+      <div className={styles.pdfErrorContainer}>
+        <div className={styles.errorIcon}>⚠️</div>
+        <p>PDF文件路径无效</p>
+        <div className={styles.debugInfo}>
+          <p>调试信息：</p>
+          <p>LaTeX结果: {JSON.stringify(latexResult, null, 2)}</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.latexPdfPreview}>
+      <div className={styles.pdfContainer}>
+        {isLoading && (
+          <div className={styles.pdfLoading}>
+            <div className={styles.loadingSpinner}></div>
+            <p>PDF预览加载中...</p>
+          </div>
+        )}
+        
+        {pdfLoadError ? (
+          <div className={styles.pdfError}>
+            <div className={styles.errorIcon}>⚠️</div>
+            <h4>PDF预览不可用</h4>
+            <p>可能的原因：</p>
+            <ul>
+              <li>浏览器不支持PDF预览</li>
+              <li>PDF文件损坏或不存在</li>
+              <li>网络连接问题</li>
+            </ul>
+            <div className={styles.pdfActions}>
+              <button 
+                className={styles.pdfActionBtn}
+                onClick={handleOpenInNewTab}
+              >
+                在新标签页中打开PDF
+              </button>
+              <button 
+                className={styles.pdfActionBtn}
+                onClick={handleRetryLoad}
+              >
+                重新加载预览
+              </button>
+            </div>
+          </div>
+        ) : (
+          <iframe
+            id={`latex-pdf-iframe-${material.id}`}
+            src={pdfPreviewUrl}
+            className={styles.pdfIframe}
+            title="LaTeX翻译PDF预览"
+            onLoad={handlePdfLoad}
+            onError={handlePdfError}
+            style={{ opacity: isLoading ? 0 : 1 }}
+          />
+        )}
       </div>
     </div>
   );

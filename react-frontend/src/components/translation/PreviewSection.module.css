@@ -369,6 +369,176 @@
   font-size: 0.9rem;
 }
 
+/* LaTeX PDF预览样式 */
+.latexPreviewContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.latexPdfPreview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.pdfInfo {
+  background: var(--neutral-100);
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.pdfInfo p {
+  margin: 0.25rem 0;
+  color: var(--neutral-700);
+}
+
+.pdfContainer {
+  flex: 1;
+  position: relative;
+  border: 1px solid var(--neutral-300);
+  border-radius: 6px;
+  background: white;
+  overflow: hidden;
+  min-height: 400px;
+  height: 100%;
+}
+
+.pdfIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.pdfLoading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--neutral-50);
+  color: var(--neutral-600);
+}
+
+.loadingSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--neutral-300);
+  border-top: 3px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pdfLoading p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.pdfError {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--neutral-50);
+  padding: 1rem;
+  text-align: center;
+  color: var(--neutral-700);
+}
+
+.pdfError h4 {
+  margin: 0.5rem 0;
+  color: var(--error-red);
+  font-size: 1rem;
+}
+
+.pdfError p {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+}
+
+.pdfError ul {
+  text-align: left;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.pdfError li {
+  margin: 0.25rem 0;
+}
+
+.pdfActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pdfActionBtn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--primary-blue);
+  color: white;
+}
+
+.pdfActionBtn:hover {
+  background: var(--primary-blue-light);
+  transform: translateY(-1px);
+}
+
+.pdfErrorContainer {
+  padding: 1rem;
+  text-align: center;
+  color: var(--error-red);
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.debugInfo {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--neutral-100);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-align: left;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.debugInfo p {
+  margin: 0.25rem 0;
+  color: var(--neutral-600);
+}
+
 /* 响应式设计 */
 @media (max-width: 1024px) {
   .comparisonView {
@@ -382,6 +552,10 @@
   
   .content {
     min-height: 300px;
+  }
+  
+  .pdfContainer {
+    min-height: 250px;
   }
 }
 
